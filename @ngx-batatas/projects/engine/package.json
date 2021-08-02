@@ -4,6 +4,9 @@
   "peerDependencies": {
     "@angular/common": "^12.0.5",
     "@angular/core": "^12.0.5",
+    "@ngrx/effects": "^12.3.0",
+    "@ngrx/store": "^12.3.0",
+    "@tauri-apps/api": "^1.0.0-beta.5",
     "uuid": "^8.3.2"
   },
   "dependencies": {
