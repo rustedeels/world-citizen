@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { BatatasEventsMap, EventsService } from '@ngx-batatas/engine';
 
 @Component({
   selector: 'wc-root',
@@ -23,10 +24,13 @@ import { Component } from '@angular/core';
         <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
       </li>
     </ul>
-    
+
   `,
   styles: []
 })
 export class AppComponent {
   title = 'world-citizen';
+  constructor(e: EventsService<BatatasEventsMap>) {
+    e.emit('engineInit');
+  }
 }

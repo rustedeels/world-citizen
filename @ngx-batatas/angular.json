@@ -3,5 +3,46 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-  }
+    "engine": {
+      "projectType": "library",
+      "root": "projects/engine",
+      "sourceRoot": "projects/engine/src",
+      "prefix": "bt",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/engine/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/engine/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/engine/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/engine/src/test.ts",
+            "tsConfig": "projects/engine/tsconfig.spec.json",
+            "karmaConfig": "projects/engine/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/engine/**/*.ts",
+              "projects/engine/**/*.html"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "engine"
 }

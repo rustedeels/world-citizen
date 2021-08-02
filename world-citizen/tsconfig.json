@@ -19,7 +19,11 @@
     "lib": [
       "ESNext",
       "dom"
-    ]
+    ],
+    "paths": {
+      "@angular/*": [ "./node_modules/@angular/*" ],
+      "@ngx-batatas/*": ["../@ngx-batatas/dist/*"]
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
