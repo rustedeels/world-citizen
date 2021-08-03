@@ -1,8 +1,10 @@
-import { Injectable } from "@angular/core";
-import { Subject, Subscription } from "rxjs";
-import { LoggerService } from "../logger/logger.service";
+import { Subject, Subscription } from 'rxjs';
 
-@Injectable({ providedIn: 'root' })
+import { Injectable } from '@angular/core';
+
+import { LoggerService } from '../logger/logger.service';
+
+@Injectable({ providedIn: 'platform' })
 export class EventsService<T extends object> {
   private readonly _subjects: { [k: string]: Subject<any> } = {}
 

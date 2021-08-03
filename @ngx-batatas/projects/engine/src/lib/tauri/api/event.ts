@@ -9,9 +9,9 @@
  * @packageDocumentation
  */
 
-import { invokeTauriCommand } from './helpers/tauri'
-import { emit as emitEvent } from './helpers/event'
-import { transformCallback } from './tauri'
+import { emit as emitEvent } from './helpers/event';
+import { invokeTauriCommand } from './helpers/tauri';
+import { transformCallback } from './tauri';
 
 interface Event<T> {
   /** Event name */

@@ -1,5 +1,5 @@
-import { Injectable } from "@angular/core";
-import { EventHandler } from "@ngx-batatas/engine";
+import { Injectable } from '@angular/core';
+import { EventHandler } from '@ngx-batatas/engine';
 
 @Injectable()
 export class HandlerService {

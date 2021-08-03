@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 
 import { isLogOptionExtra, LogLevel, LogOption, LogOptionExtra } from './logger.model';
 
-@Injectable({ providedIn: 'root'})
+@Injectable({ providedIn: 'platform'})
 export class LoggerService {
   public logLevel: number = LogLevel.all;
 

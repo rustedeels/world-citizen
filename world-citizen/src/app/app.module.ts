@@ -1,12 +1,12 @@
-import { NgModule } from '@angular/core';
+import { environment } from 'src/environments/environment';
+
+import { NgModule, NgZone } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { EffectsModule } from '@ngrx/effects';
-import { StoreModule } from '@ngrx/store';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { ENGINE_STATE, EventsModule, LoggerModule, LogLevel } from '@ngx-batatas/engine';
+import { akitaDevtools } from '@datorama/akita';
+import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
+import { EngineModule, LoggerModule, LogLevel } from '@ngx-batatas/engine';
 
 import { AppComponent } from './app.component';
-import { HandlerService } from './handler.service';
 import { NewModule } from './new.module';
 
 @NgModule({
@@ -17,12 +17,14 @@ import { NewModule } from './new.module';
     BrowserModule,
     NewModule,
     LoggerModule.forLevel(LogLevel.all),
-    EventsModule.forRoot([HandlerService]),
-    StoreModule.forRoot(ENGINE_STATE),
-    EffectsModule.forRoot([]),
-    StoreDevtoolsModule.instrument({})
+    EngineModule.forRoot(environment.production),
+    AkitaNgDevtools.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(zone: NgZone) {
+    akitaDevtools(zone)
+  }
+}
