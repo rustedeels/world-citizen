@@ -5,13 +5,14 @@ import { DateTimeModule } from '../date-time/date-time.module';
 import { EventsModule } from '../events/events.module';
 import { LoggerService } from '../logger/logger.service';
 import { ResourcesModule } from '../resources/resources.module';
+import { SystemModule } from '../system/system.module';
 import { EngineStore } from './engine.store';
 
 let isProd = false;
 
 @NgModule({
   imports: [
-    // SystemModule,
+    SystemModule,
     EventsModule.forRoot([]),
     DateTimeModule,
     ResourcesModule.forRoot(),

@@ -2,6 +2,7 @@ import { Injectable, InjectionToken } from '@angular/core';
 
 import { EventsService } from '../events/events.service';
 import { LoggerService } from '../logger/logger.service';
+import { OSPathMapService } from '../system/path-map.service';
 import { Resource, ResourceEventsMap } from './resources.model';
 import { ResourcesStore } from './resources.store';
 
@@ -15,7 +16,7 @@ export class ResourcesLoader {
   public constructor(
     private readonly _logger: LoggerService,
     private readonly _store: ResourcesStore,
-    // private readonly _pathMap: OSPathMapService,
+    private readonly _pathMap: OSPathMapService,
     private readonly _events: EventsService<ResourceEventsMap>,
   ) { }
 
@@ -44,10 +45,10 @@ export class ResourcesLoader {
 
   private async addToStore(r: Resource): Promise<void> {
     try {
-      //const path = this._pathMap.resolveCurrentDir(r.path);
+      const path = this._pathMap.resolveCurrentDir(r.path);
       this._store.upsert(r.id, {
         ...r,
-        // path
+        path,
       });
     } catch (err) {
       this._logger.error('Error adding resource', {

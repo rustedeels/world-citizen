@@ -31,7 +31,6 @@ export class ResourcesModule {
 
 function addResources(loader: ResourcesLoader, res: Resource[][]) {
   return () => {
-    console.warn(res)
     if (!res || !res.length) return;
     loader.add(...res.flatMap(e => e));
   }
