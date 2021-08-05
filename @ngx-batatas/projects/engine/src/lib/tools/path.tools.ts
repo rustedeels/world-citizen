@@ -2,6 +2,7 @@
 export function buildPath(...parts: string[]): string {
   return parts
     .join('/')
+    .replace(/\/\/\//g, '/')
     .replace(/\/\//g, '/');
 }
 

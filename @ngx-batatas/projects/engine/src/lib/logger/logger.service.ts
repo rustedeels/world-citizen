@@ -61,11 +61,13 @@ export class LoggerService {
     // stop timer
     if(opt.timer) this.stopTimer(opt.timer);
 
-    let params = opt.params ?? [];
+    let params = [];
 
-    if (opt.params && opt.preserve) {
+    if (opt.preserve) {
       for (const p of (opt.params ?? []))
         params.push(JSON.parse(JSON.stringify(p)));
+    } else {
+      params = opt?.params ?? [];
     }
 
     const l = opt.level;

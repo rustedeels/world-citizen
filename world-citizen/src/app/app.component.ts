@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { BatatasEventsMap, EventsService } from '@ngx-batatas/engine';
+import { EvaluatorService, LoaderService } from '@ngx-batatas/engine';
 
 @Component({
   selector: 'wc-root',
@@ -30,7 +30,16 @@ import { BatatasEventsMap, EventsService } from '@ngx-batatas/engine';
 })
 export class AppComponent {
   title = 'world-citizen';
-  constructor(e: EventsService<BatatasEventsMap>) {
-    e.emit('engineInit');
+  constructor(loader: LoaderService, evalService: EvaluatorService) {
+    loader.load();
+
+    setTimeout(() => {
+      evalService.evaluate$('#resCount()')
+      .subscribe(e => console.warn(e));
+      evalService.evaluate$('#resCount2()')
+        .subscribe(e => console.warn(e));
+      evalService.evaluate$('#resCount2() + #resCount()')
+        .subscribe(e => console.warn(e));
+    }, 1000);
   }
 }

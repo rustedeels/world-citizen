@@ -2,7 +2,9 @@ import { ModuleWithProviders, NgModule, NgZone } from '@angular/core';
 import { akitaDevtools } from '@datorama/akita';
 
 import { DateTimeModule } from '../date-time/date-time.module';
+import { EvaluatorModule } from '../evaluator';
 import { EventsModule } from '../events/events.module';
+import { INTERNAL_EVALUATORS } from '../internal/evaluators';
 import { LoggerService } from '../logger/logger.service';
 import { ResourcesModule } from '../resources/resources.module';
 import { SystemModule } from '../system/system.module';
@@ -16,6 +18,7 @@ let isProd = false;
     EventsModule.forRoot([]),
     DateTimeModule,
     ResourcesModule.forRoot(),
+    EvaluatorModule.forRoot(INTERNAL_EVALUATORS),
   ]
 })
 export class EngineModule {

@@ -11,8 +11,3 @@ export interface Resource {
 }
 
 export interface ResourceState extends EntityState<Resource, string> {}
-
-export interface ResourceEventsMap {
-  resourcesLoadingStart: never;
-  resourcesLodingComplete: never;
-}
