@@ -4,6 +4,7 @@ import { BaseEntityLoader } from '../data-loader/base-entity-loader';
 import { LoaderService } from '../data-loader/loader.service';
 import { LoggerService } from '../logger/logger.service';
 import { OSPathMapService } from '../system/path-map.service';
+import { buildPath } from '../tools/path.tools';
 import { Resource, ResourceStoreName } from './resources.model';
 import { ResourcesStore } from './resources.store';
 
@@ -23,7 +24,8 @@ export class ResourcesLoader extends BaseEntityLoader<Resource> {
   }
 
   protected async beforeInsert(item: Resource): Promise<Resource> {
-    const path = this._pathMap.resolveCurrentDir(item.path);
+    const path = this._pathMap.resolveCurrentDir(
+      buildPath('/assets/resources', item.path));
     return {
       ...item,
       path,

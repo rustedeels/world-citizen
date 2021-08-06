@@ -1,0 +1,27 @@
+import { BodyPartId, BodyPartSlotMap } from './body-part.model';
+
+export const BodyPartsMap: BodyPartSlotMap<BodyPartId> = {
+  bodyMale: 'body',
+  bodyFemale: 'body',
+  flatChest: 'tits',
+  smallTits: 'tits',
+  tits: 'tits',
+  bigTits: 'tits',
+  smallDick: 'gen',
+  dick: 'gen',
+  bigDick: 'gen',
+  tightPussy: 'gen',
+  pussy: 'gen',
+  loosePussy: 'gen',
+  tightAnus: 'anus',
+  anus: 'anus',
+  looseAnus: 'anus',
+  shortHair: 'hair',
+  longHair: 'hair',
+  eyes: 'eyes',
+  ears: 'ears',
+  mouth: 'mouth',
+  nose: 'nose',
+  hands: 'hands',
+  feet: 'feet',
+}

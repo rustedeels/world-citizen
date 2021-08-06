@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 
-import { EventHandler } from '../events/decorator';
-import { DateTimeEventsMap } from './date-time.model';
-import { DateTimeStore } from './date-time.store';
+import { DateTimeEventsMap } from '../../date-time/date-time.model';
+import { DateTimeStore } from '../../date-time/date-time.store';
+import { EventHandler } from '../../events/decorator';
 
-@Injectable({ providedIn: 'root'})
+@Injectable()
 export class DateTimeHandlers {
   public constructor(private readonly _store: DateTimeStore) {}
 
