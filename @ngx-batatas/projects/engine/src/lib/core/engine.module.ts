@@ -1,5 +1,6 @@
 import { ModuleWithProviders, NgModule, NgZone } from '@angular/core';
 
+import { AttributesModule } from '../attr/attr.module';
 import { BodyModule } from '../body';
 import { CharModule } from '../char';
 import { DateTimeModule } from '../date-time/date-time.module';
@@ -21,6 +22,7 @@ import { EngineStore } from './engine.store';
     EvaluatorModule.forRoot(INTERNAL_EVALUATORS),
     CharModule,
     BodyModule,
+    AttributesModule,
   ]
 })
 export class EngineModule {

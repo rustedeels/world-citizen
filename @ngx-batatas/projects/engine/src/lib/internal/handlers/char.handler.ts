@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
 
+import { CharAttributes, CoreAttr } from '../../attr/attr.model';
+import { AttributeService } from '../../attr/attr.service';
+import { CharAttributesStore } from '../../attr/char-attr.store';
 import { BodyParts, BodyStore, CharBody, EquipSlot } from '../../body';
 import { BodyPartId } from '../../body-part';
 import { BodyPartService } from '../../body-part/body-part.service';
@@ -7,6 +10,7 @@ import { Char, CharInit } from '../../char/char.model';
 import { CharStore } from '../../char/char.store';
 import { EventHandler } from '../../events/decorator';
 import { LoggerService } from '../../logger/logger.service';
+import { getDateString } from '../../tools/date.tools';
 
 @Injectable()
 export class CharEventsHandler {
@@ -16,6 +20,8 @@ export class CharEventsHandler {
     private readonly _charStore: CharStore,
     private readonly _bodyParts: BodyPartService<BodyPartId>,
     private readonly _bodyStore: BodyStore,
+    private readonly _attr: AttributeService<CoreAttr>,
+    private readonly _attrStore: CharAttributesStore<CoreAttr>,
   ) {}
 
   @EventHandler('charInit')
@@ -29,11 +35,16 @@ export class CharEventsHandler {
       id: init.id,
       name: init.name,
       portrait: '',
+      birth: getDateString(init.birth),
+      gender: init.gender,
+      surname: init.surname,
     }
     const body = this.buildBody(init.id, init.body);
+    const attr = this.getCoreAttributes(init.id);
 
     this._charStore.add(char);
     this._bodyStore.add(body);
+    this._attrStore.add(attr);
     this._charStore.setPortrait(char.id, init.resourceId);
   }
 
@@ -49,6 +60,22 @@ export class CharEventsHandler {
       parts: bodyParts,
       equipment: this.getDefaultBodyEquipment(),
     };
+  }
+
+  private getCoreAttributes(id: string): CharAttributes<CoreAttr> {
+    return {
+      id,
+      attr: {
+        strength: this._attr.getAttribute('strength'),
+        endurance: this._attr.getAttribute('endurance'),
+        agility: this._attr.getAttribute('agility'),
+        intelligence: this._attr.getAttribute('intelligence'),
+        charisma: this._attr.getAttribute('charisma'),
+        openess: this._attr.getAttribute('openess'),
+        dominance: this._attr.getAttribute('dominance'),
+        submission: this._attr.getAttribute('submission'),
+      }
+    }
   }
 
   private getDefaultBodyParts(): BodyParts {
