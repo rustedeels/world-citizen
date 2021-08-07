@@ -1,6 +1,6 @@
 import { EntityState } from '@datorama/akita';
 
-export type ResourceType = 'video' | 'image' | 'sound' | 'music'
+export type ResourceType = 'video' | 'image' | 'sound' | 'music' | 'background'
 export const ResourceStoreName = '$resources';
 
 export interface Resource {

@@ -22,3 +22,27 @@ export abstract class BaseEntityLoader<T extends { id: string }> extends BaseLoa
 
   protected async beforeInsert(item: T): Promise<T> { return item; }
 }
+
+export abstract class BaseEntityGenerator<
+  T extends { id: string }, K  extends { id: string }
+> extends BaseLoader<K> {
+
+  public constructor (
+    logger: LoggerService,
+    protected readonly _store: EntityStore,
+  ) { super(logger); }
+
+  protected async loadItem(item: K): Promise<[true] | [false, string] | [false, string, unknown]> {
+    try {
+      const newItems = await this.generate(item)
+      for (const i of newItems) {
+        this._store.upsert(i.id, i);
+      }
+      return [true];
+    } catch (err) {
+      return [false, "Exception thrown", err]
+    }
+  }
+
+  protected abstract generate(item: K): Promise<T[]>;
+}

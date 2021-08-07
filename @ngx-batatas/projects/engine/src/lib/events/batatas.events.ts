@@ -10,5 +10,5 @@ export interface BatatasEventsMap {
   /** A game was loaded */
   gameLoaded: never;
   /** A new character was added */
-  charInit: CharInit
+  charInit: CharInit | CharInit[];
 }

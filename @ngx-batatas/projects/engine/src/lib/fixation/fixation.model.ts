@@ -5,6 +5,7 @@ export interface Fixation {
   name: string;
   desc: string;
   level: number;
+  type?: string;
 }
 
 export enum FixationLevel {

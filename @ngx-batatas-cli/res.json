@@ -1,0 +1,43 @@
+[
+  {
+    "name": "chapter1",
+    "bool": "#hasCar()",
+    "party": [
+      "char1",
+      "char2(#playerLikesWoman())"
+    ],
+    "actions": [
+      "actionNoParam[]()",
+      "actionParam[100]()",
+      "actionConditional[{ name: #partyName(1) }](#hasParty(1))"
+    ],
+    "media": [
+      "backRoom1",
+      "music3"
+    ],
+    "next": [
+      "go to chapter 2[chapter2]()",
+      "go to chapter 3[chapter3](#hasParty(1))"
+    ],
+    "dialog": []
+  },
+  {
+    "name": "chapter2",
+    "bool": "`#hasCar()`",
+    "party": [
+      "char1",
+      "char2"
+    ],
+    "actions": [
+      "actionNoParam[]()"
+    ],
+    "media": [
+      "backRoom2",
+      "music3"
+    ],
+    "next": [
+      "go to chapter 2[chapter1]()"
+    ],
+    "dialog": []
+  }
+]
