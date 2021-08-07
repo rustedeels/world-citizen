@@ -1,5 +1,5 @@
 export function getDateString(d: Date): `${number}-${number}-${number}` {
-  return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`;
+  return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}` as any;
 }
 
 export function getDate(date: `${number}-${number}-${number}`): Date {

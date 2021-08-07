@@ -8,6 +8,8 @@ import { BodyState, BodyStoreName } from './body.model';
 @Injectable({ providedIn: 'platform' })
 export class BodyStore extends EntityStore<BodyState> {
 
+  public constructor() { super() }
+
   /** Add experience to body part */
   public addExperience(id: string, slot: BodySlot, amount: number): void {
     this.update(id, s => ({

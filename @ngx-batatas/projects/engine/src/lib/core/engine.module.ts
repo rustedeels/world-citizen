@@ -1,11 +1,12 @@
 import { ModuleWithProviders, NgModule, NgZone } from '@angular/core';
 
 import { AttributesModule } from '../attr/attr.module';
-import { BodyModule } from '../body';
-import { CharModule } from '../char';
+import { BodyModule } from '../body/body.module';
+import { CharModule } from '../char/char.module';
 import { DateTimeModule } from '../date-time/date-time.module';
-import { EvaluatorModule } from '../evaluator';
+import { EvaluatorModule } from '../evaluator/evaluator.module';
 import { EventsModule } from '../events/events.module';
+import { FixationModule } from '../fixation/fixation.module';
 import { INTERNAL_EVALUATORS } from '../internal/evaluators/_index';
 import { INTERNAL_HANDLERS } from '../internal/handlers/_index';
 import { LoggerService } from '../logger/logger.service';
@@ -16,13 +17,14 @@ import { EngineStore } from './engine.store';
 @NgModule({
   imports: [
     SystemModule,
-    EventsModule.forRoot(INTERNAL_HANDLERS),
     DateTimeModule,
     ResourcesModule.forRoot(),
     EvaluatorModule.forRoot(INTERNAL_EVALUATORS),
     CharModule,
     BodyModule,
     AttributesModule,
+    FixationModule,
+    EventsModule.forRoot(INTERNAL_HANDLERS),
   ]
 })
 export class EngineModule {

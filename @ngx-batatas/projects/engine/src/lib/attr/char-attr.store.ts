@@ -7,6 +7,8 @@ import { CharAttributeState, CharAttributeStoreName, CoreAttr } from './attr.mod
 @Injectable({ providedIn: 'platform' })
 export class CharAttributesStore<T extends CoreAttr> extends EntityStore<CharAttributeState<T>> {
 
+  public constructor() { super() }
+
   /** Update experience for an attribute */
   public addExperience(id: string, type: T, amount: number): void {
     this.update(id, s => ({
