@@ -2,8 +2,8 @@ import { splitChapter } from '../@ngx-batatas/projects/engine/src/lib/chapter/ch
 
 const filePath = Deno.args[0];
 if (!filePath) {
-    console.warn('A file is required!')
-    Deno.exit()
+  console.warn('A file is required!')
+  Deno.exit()
 }
 
 const content = await Deno.readTextFile(filePath);
