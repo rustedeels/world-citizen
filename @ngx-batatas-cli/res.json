@@ -1,43 +1,190 @@
 [
   {
-    "name": "chapter1",
-    "bool": "#hasCar()",
+    "name": "rootchapter1",
     "party": [
-      "char1",
-      "char2(#playerLikesWoman())"
+      {
+        "name": "char1",
+        "props": "",
+        "bool": ""
+      },
+      {
+        "name": "char2",
+        "props": "",
+        "bool": "#playerLikesWoman()"
+      }
     ],
+    "bool": "#hasCar()",
     "actions": [
-      "actionNoParam[]()",
-      "actionParam[100]()",
-      "actionConditional[{ name: #partyName(1) }](#hasParty(1))"
+      {
+        "name": "actionNoParam",
+        "props": "",
+        "bool": ""
+      },
+      {
+        "name": "actionParam",
+        "props": "100",
+        "bool": ""
+      },
+      {
+        "name": "actionConditional",
+        "props": "{ name: #partyName(1) }",
+        "bool": "#hasParty(1)"
+      }
     ],
     "media": [
-      "backRoom1",
-      "music3"
+      {
+        "name": "backRoom1",
+        "props": "",
+        "bool": ""
+      },
+      {
+        "name": "music3",
+        "props": "",
+        "bool": ""
+      }
     ],
     "next": [
-      "go to chapter 2[chapter2]()",
-      "go to chapter 3[chapter3](#hasParty(1))"
+      {
+        "name": "go to chapter 2",
+        "props": "chapter2",
+        "bool": ""
+      },
+      {
+        "name": "go to chapter 3",
+        "props": "chapter3",
+        "bool": "#hasParty(1)"
+      }
     ],
-    "dialog": []
+    "dialog": [
+      {
+        "name": "rootdialog1",
+        "character": "party0",
+        "bool": "",
+        "media": [
+          {
+            "name": "`#getCharPose",
+            "props": "",
+            "bool": ""
+          }
+        ],
+        "text": [
+          {
+            "text": "Hey I have money",
+            "bool": "#hasMoney()",
+            "media": [
+              {
+                "name": "videoMoney",
+                "props": "LOOP",
+                "bool": ""
+              }
+            ]
+          },
+          {
+            "text": "Hey I have a ring",
+            "bool": "#hasRing()",
+            "media": [
+              {
+                "name": "imgRing",
+                "props": "",
+                "bool": ""
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "rootdialog2",
+        "character": "player",
+        "bool": "",
+        "media": [
+          {
+            "name": "imgFemale",
+            "props": "",
+            "bool": "#isFemale()"
+          },
+          {
+            "name": "imgMale",
+            "props": "",
+            "bool": "#isMale()"
+          }
+        ],
+        "text": [
+          {
+            "text": "Hey my name is `#charName()`",
+            "bool": "",
+            "media": []
+          },
+          {
+            "text": "And I have `#charAge()` years",
+            "bool": "",
+            "media": []
+          }
+        ]
+      },
+      {
+        "name": "rootdialog3",
+        "character": "party1",
+        "bool": "#hasParty(1)",
+        "media": [],
+        "text": [
+          {
+            "text": "Let's go",
+            "bool": "",
+            "media": []
+          }
+        ]
+      }
+    ]
   },
   {
-    "name": "chapter2",
-    "bool": "`#hasCar()`",
+    "name": "rootchapter2",
     "party": [
-      "char1",
-      "char2"
+      {
+        "name": "char1",
+        "props": "",
+        "bool": ""
+      },
+      {
+        "name": "char2",
+        "props": "",
+        "bool": ""
+      }
     ],
+    "bool": "`#hasCar()`",
     "actions": [
-      "actionNoParam[]()"
+      {
+        "name": "actionNoParam",
+        "props": "",
+        "bool": ""
+      }
     ],
     "media": [
-      "backRoom2",
-      "music3"
+      {
+        "name": "backRoom2",
+        "props": "",
+        "bool": ""
+      },
+      {
+        "name": "music3",
+        "props": "",
+        "bool": ""
+      }
     ],
     "next": [
-      "go to chapter 2[chapter1]()"
+      {
+        "name": "go to chapter 2",
+        "props": "chapter1",
+        "bool": ""
+      }
     ],
-    "dialog": []
+    "dialog": [
+      {
+        "name": "rootdialog3",
+        "character": "party1",
+        "bool": "#hasParty(1)",
+        "media": [],
+        "text": []
+      }
+    ]
   }
 ]

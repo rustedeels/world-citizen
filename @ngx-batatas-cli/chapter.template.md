@@ -8,7 +8,7 @@
 >#go to chapter 2[chapter2]()
 >#go to chapter 3[chapter3](#hasParty(1))
 
-## dialog1|party0
+## dialog1|1
 >>`#getCharPose()`
 
 * Hey I have money
@@ -19,14 +19,14 @@
 >>imgRing
 >!#hasRing()
 
-## dialog2|player
+## dialog2|0
 >>imgFemale[](#isFemale())
 >>imgMale[](#isMale())
 
 * Hey my name is `#charName()`
 * And I have `#charAge()` years
 
-## dialog3|party1
+## dialog3|1
 >!#hasParty(1)
 
 * Let's go
@@ -38,5 +38,5 @@
 >$actionNoParam[]()
 >#go to chapter 2[chapter1]()
 
-## dialog3|party1
+## dialog3|1
 >!#hasParty(1)

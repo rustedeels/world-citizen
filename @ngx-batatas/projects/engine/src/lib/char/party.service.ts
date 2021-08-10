@@ -1,13 +1,23 @@
 import { Injectable } from '@angular/core';
 
+import { PLAYER_ID } from './char.model';
+
 @Injectable({ providedIn: 'platform' })
 export class PartyService {
   private readonly __party = new Set<string>();
 
-  public constructor() {}
+  public constructor() {
+    this.__party.add(PLAYER_ID);
+  }
 
   public clear(): void {
     this.__party.clear();
+    this.__party.add(PLAYER_ID)
+  }
+
+  public set(ids: string[]): void {
+    this.clear();
+    ids.forEach(id => this.add(id));
   }
 
   public add(id: string): void {

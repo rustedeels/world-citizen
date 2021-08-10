@@ -35,13 +35,20 @@ export interface Dialog {
   name: string;
   text: DialogText[];
   media: Media[];
-  charId: string;
+  /** index of party member */
+  party: number;
   bool: string;
 }
 
-export interface PartyMember {
+export type PartyMember = PartyMemberStatic | PartyMemberDyn;
+export interface PartyMemberStatic {
   /** CharId */
   id: string;
+  bool: string;
+}
+
+export interface PartyMemberDyn {
+  loader: string;
   bool: string;
 }
 

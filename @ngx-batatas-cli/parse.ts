@@ -7,5 +7,5 @@ if (!filePath) {
 }
 
 const content = await Deno.readTextFile(filePath);
-const raw = JSON.stringify(splitChapter(content), undefined, 2);
+const raw = JSON.stringify(splitChapter(content, 'root'), undefined, 2);
 await Deno.writeTextFile('./res.json', raw);
