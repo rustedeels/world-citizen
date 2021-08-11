@@ -58,7 +58,7 @@ const isValid = prompt(`Bump from ${V(version)} to ${V(next)}? [y/N]`) === 'y';
 if (!isValid) Deno.exit(0);
 
 pk.version = V(next);
-await Deno.writeTextFile(versionPath, `export const CORE_VERSION = '${V(next)}';\n`);
+await Deno.writeTextFile(versionPath, `export const VERSION = '${V(next)}';\n`);
 await Deno.writeTextFile(packagePath, JSON.stringify(pk, undefined, 2));
 
 console.log('publishing for ' + path)
