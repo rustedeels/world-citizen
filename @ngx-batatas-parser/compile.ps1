@@ -1,4 +1,4 @@
-rm -Force -Recurse dist
+rm -Force -Recurse dist/*
 mkdir dist
 cp package.json dist/
 cp index.ts dist/

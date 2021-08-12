@@ -1,3 +1,1 @@
-export function prefix(val: string): string {
-  return `[BATATAS|${val}`
-}
+export const prefix = (val: string, prefix: string) => `${prefix}=>${val}`;
