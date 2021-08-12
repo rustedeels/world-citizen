@@ -53,19 +53,20 @@ export function regexSplit(str: string, regex: RegExp): string[] {
   const res: string[] = [];
 
   while (true) {
-    const i = str.search(regex);
-    if (i === -1) break;
-
-    str = str.substring(i);
-
-    const i2 = str.substring(1).search(regex);
-    if (i2 === -1) {
+    if (str.length < 2) {
       res.push(str);
       break;
     }
 
-    res.push(str.substring(0, i2 + 1));
-    str = str.substring(i2 + 1);
+    let i = str.substring(1).search(regex);
+    if (i === -1) {
+      res.push(str);
+      break;
+    }
+    i++;
+
+    res.push(str.substr(0, i));
+    str = str.substring(i);
   }
 
   return res;

@@ -10,7 +10,8 @@ $ actionConditional[{ name: #partyName(1) }](#hasParty(1))
 > go to chapter 3[chapter3](#hasParty(1))
 
 ## dialog1|1
-& `#getCharPose()`
+& `#getCharPose(0)`
+& `#getCharPose(1)`(#hasChar(1))
 
 * Hey I have money
 & videoMoney[LOOP]()
@@ -22,7 +23,7 @@ $ actionConditional[{ name: #partyName(1) }](#hasParty(1))
 
 ## dialog2|0
 & imgFemale[](#isFemale())
-& imgMale[](#isMale())
+& imgMale(#isMale())
 
 * Hey my name is `#charName()`
 * And I have `#charAge()` years

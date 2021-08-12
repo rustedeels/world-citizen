@@ -35,5 +35,5 @@ export const DIALOG_TEXT: SingleToken = {
   multi: false,
 }
 
-export const PROPERTY_REGEX = /^(.*?)\[(.*)\]\((.*)\)|^(.*?)\[(.*)\]|^(.*?)\((.*)\)|^(.*)/gm;
+export const PROPERTY_REGEX = /^(.*?)\[(.*)\]\((.*)\)|^(.*?)\[(.*)\]|^(.*?)\((?!.*\)`)(.*)\)|^(.*)/gm;
 export const SECTION_REGEX = /(.*)\|(.*)|(.*)/gm;
