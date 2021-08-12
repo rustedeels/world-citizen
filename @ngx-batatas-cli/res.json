@@ -1,0 +1,11 @@
+[
+  {
+    "name": "# chapter1|char1,char2(#playerLikesWoman())\r\n! #hasCar()\r\n& backRoom1\r\n& music3\r\n$ actionNoParam[]()\r\n$ actionParam[100]()\r\n$ actionConditional[{ name: #partyName(1) }](#hasParty(1))\r\n> go to chapter 2[chapter2]()\r\n> go to chapter 3[chapter3](#hasParty(1))\r\n\r\n## dialog1|1\r\n& `#getCharPose()`\r\n\r\n* Hey I have money\r\n& videoMoney[LOOP]()\r\n! #hasMoney()\r\n\r\n* Hey I have a ring\r\n& imgRing\r\n! #hasRing()\r\n\r\n## dialog2|0\r\n& imgFemale[](#isFemale())\r\n& imgMale[](#isMale())\r\n\r\n* Hey my name is `#charName()`\r\n* And I have `#charAge()` years\r\n\r\n## dialog3|1\r\n! #hasParty(1)\r\n\r\n* Let's go=>",
+    "party": [],
+    "bool": "#hasParty(1)",
+    "actions": [],
+    "media": [],
+    "next": [],
+    "dialog": []
+  }
+]
