@@ -1,5 +1,5 @@
 {
-  "name": "@npx-batatas/core",
+  "name": "@ngx-batatas/core",
   "version": "0.1.2",
   "description": "Core library for batatas engine",
   "main": "index.ts",

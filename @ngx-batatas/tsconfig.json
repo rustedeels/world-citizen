@@ -6,10 +6,8 @@
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
     "paths": {
-      "engine": [
-        "dist/engine/engine",
-        "dist/engine"
-      ]
+      "@ngx-batatas/core": ["../@ngx-batatas-core/dist"],
+      "@ngx-batatas/parser": ["../@ngx-batatas-parser/dist"],
     },
     "strict": true,
     "noImplicitReturns": true,

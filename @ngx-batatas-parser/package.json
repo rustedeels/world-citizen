@@ -1,5 +1,5 @@
 {
-  "name": "@npx-batatas/parser",
+  "name": "@ngx-batatas/parser",
   "version": "0.1.0",
   "description": "Parser for ngx-batatas engine chapters",
   "main": "index.ts",
@@ -18,6 +18,6 @@
   },
   "homepage": "https://github.com/rustedeels/world-citizen#readme",
   "peerDependencies": {
-    "@npx-batatas/core": "0.1.2"
+    "@ngx-batatas/core": "0.1.2"
   }
 }
