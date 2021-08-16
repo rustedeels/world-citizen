@@ -1,3 +1,5 @@
+import { StringMap } from './utils.model';
+
 export interface RawChapter {
   name: string;
   bool: string;
@@ -106,7 +108,7 @@ export interface Chapter {
 
 export interface ChaptersGenerator {
   id: string;
-  resMap: { [key: string]: string };
-  charMap: { [key: string]: string };
+  resMap: StringMap<string>;
+  charMap: StringMap<string>;
   chapters: string[];
 }

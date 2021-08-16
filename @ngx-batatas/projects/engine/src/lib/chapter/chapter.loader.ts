@@ -1,11 +1,17 @@
 import { Injectable } from '@angular/core';
+import {
+  Chapter,
+  ChaptersGenerator,
+} from '@ngx-batatas/core';
+import { parseChapters } from '@ngx-batatas/parser';
 import { readTextFile } from '@tauri-apps/api/fs';
 
 import { BaseEntityGenerator } from '../data-loader/base-entity-loader';
 import { LoaderService } from '../data-loader/loader.service';
 import { LoggerService } from '../logger/logger.service';
 import { OSPathMapService } from '../system/path-map.service';
-import { Chapter, ChaptersGenerator, ChapterStoreName } from './chapter.model';
+import { mapRawChapters } from './chapter.mapper';
+import { ChapterStoreName } from './chapter.model';
 import { ChapterStore } from './chapter.store';
 
 @Injectable({ providedIn: 'platform' })
@@ -38,11 +44,11 @@ export class ChapterLoaders extends BaseEntityGenerator<Chapter, ChaptersGenerat
     content: string,
     src: ChaptersGenerator,
   ): Chapter[] {
-    return [];
-  }
-
-  private isEvalName(s: string): boolean {
-    return s.indexOf('`') === 0
-      && s.lastIndexOf('`') === s.length - 1;
+    return mapRawChapters(
+      parseChapters([content]),
+      src.charMap,
+      src.resMap,
+      this._logger,
+    )
   }
 }
