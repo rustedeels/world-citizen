@@ -55,8 +55,7 @@ function parseChapterNameParty(raw: string, prefix: string): [string, RawPropert
 function parseDialog(src: string, prefix: string): RawDialog {
   const [dialog, ...texts] = regexSplit(src, DIALOG_TEXT.regex);
   if (!dialog) throw new Error('Dialog not defined for: ' + src);
-  const [name, character] = parseDialogChar(extractToken(dialog, DIALOG), prefix);
-
+  const [name, character] = parseDialogChar(extractToken(dialog, DIALOG));
   return {
     name,
     character,
@@ -66,13 +65,13 @@ function parseDialog(src: string, prefix: string): RawDialog {
   }
 }
 
-function parseDialogChar(raw: string, prefix: string): [string, number] {
+function parseDialogChar(raw: string): [string, number] {
   const m = matchSingle(raw, SECTION_REGEX);
   if (!m) throw new Error('Error parsing dialog title')
 
   const name = m[1] ?? m[3] ?? '';
   const char = parseInt(m[2] ?? '', 10);
-  return [P(name, prefix), isNaN(char) ? 0 : char];
+  return [name, isNaN(char) ? 0 : char];
 }
 
 function parseDialogText(src: string): RawTextDialog {

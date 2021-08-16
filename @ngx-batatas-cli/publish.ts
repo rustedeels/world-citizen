@@ -41,9 +41,12 @@ const next: Version = [...version];
 switch (pubType) {
   case 'major':
     next[0] = next[0] + 1;
+    next[1] = 0;
+    next[2] = 0;
     break;
   case 'minor':
     next[1] = next[1] + 1;
+    next[2] = 0;
     break;
   case 'patch':
     next[2] = next[2] + 1;
