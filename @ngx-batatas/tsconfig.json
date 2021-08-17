@@ -5,10 +5,6 @@
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
-    "paths": {
-      "@ngx-batatas/core": ["../@ngx-batatas-core/dist"],
-      "@ngx-batatas/parser": ["../@ngx-batatas-parser/dist"],
-    },
     "strict": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,

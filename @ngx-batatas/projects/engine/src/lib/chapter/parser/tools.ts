@@ -1,6 +1,9 @@
-import { RawProperty } from '@npx-batatas/core';
-
-import { MultiToken, SingleToken, Token } from './models';
+import { RawProperty } from '../chapter.model';
+import {
+  MultiToken,
+  SingleToken,
+  Token,
+} from './models';
 import { PROPERTY_REGEX } from './tokens';
 
 /** Extract property in format text[prop](bool) */
@@ -24,7 +27,7 @@ export function matchSingle(src: string, regex: RegExp): RegExpMatchArray | unde
 
 /**
  * Extract match strings
- * 
+ *
  * @param src Source string
  * @param token Token to match
  */
@@ -45,7 +48,7 @@ export function extractToken(src: string, token: Token): string | string[] {
 
 /**
  * Split string by regex match
- * 
+ *
  * @param str Source string
  * @param regex Regex to match split points
  * @returns string parts

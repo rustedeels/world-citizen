@@ -1,22 +1,23 @@
+import { LoggerService } from '../logger';
+import { StringMap } from '../shared/utils.model';
+import {
+  isPrefix,
+  prefix,
+  splitPrefix,
+} from '../tools/prefix.tool';
 import {
   Chapter,
   ChapterAction,
   Dialog,
   DialogText,
-  isPrefix,
   Media,
   NextChapter,
   PartyMember,
-  prefix,
   RawChapter,
   RawDialog,
   RawProperty,
   RawTextDialog,
-  splitPrefix,
-  StringMap,
-} from '@ngx-batatas/core';
-
-import { LoggerService } from '../logger';
+} from './chapter.model';
 
 export function mapRawChapters(
   raw: RawChapter[],

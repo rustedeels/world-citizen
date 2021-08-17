@@ -1,7 +1,12 @@
-import { ModuleWithProviders, NgModule, NgZone } from '@angular/core';
+import {
+  ModuleWithProviders,
+  NgModule,
+  NgZone,
+} from '@angular/core';
 
 import { AttributesModule } from '../attr/attr.module';
 import { BodyModule } from '../body/body.module';
+import { ChapterModule } from '../chapter/chapter.module';
 import { CharModule } from '../char/char.module';
 import { DateTimeModule } from '../date-time/date-time.module';
 import { EvaluatorModule } from '../evaluator/evaluator.module';
@@ -25,6 +30,7 @@ import { EngineStore } from './engine.store';
     AttributesModule,
     FixationModule,
     EventsModule.forRoot(INTERNAL_HANDLERS),
+    ChapterModule.forRoot(),
   ]
 })
 export class EngineModule {

@@ -1270,6 +1270,16 @@
   dependencies:
     enhanced-resolve "5.7.0"
 
+"@ngx-batatas/core@0.4.0":
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/@ngx-batatas/core/-/core-0.4.0.tgz#76659fdfded35515129945daf24ea5c212b3f00f"
+  integrity sha512-EIFgsqRXKegiUFHzZTWgp0qzZRNoqR1TGCz2/B3g7O4N97PytsSddICetYIEzWOaB+qyUDxLs8J864nhKH0bwg==
+
+"@ngx-batatas/parser@0.4.0":
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/@ngx-batatas/parser/-/parser-0.4.0.tgz#0b88cdd2e2425b92a26dbc31a09c9a9eb232dd33"
+  integrity sha512-qi6DtV6HP3TFuZgXqx9myAaGNxEQKMxyP7t6WgF3yVUldzvTDFVnRuXt3ssbLt5zNu+BSv1+zRm3Bi9dQInVhw==
+
 "@nodelib/fs.scandir@2.1.5":
   version "2.1.5"
   resolved "https://registry.yarnpkg.com/@nodelib/fs.scandir/-/fs.scandir-2.1.5.tgz#7619c2eb21b25483f6d167548b4cfd5a7488c3d5"

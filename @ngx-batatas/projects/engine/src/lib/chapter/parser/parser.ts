@@ -1,13 +1,32 @@
-import { prefix as P, RawChapter, RawDialog, RawProperty, RawTextDialog } from '@npx-batatas/core';
-
+import { prefix as P } from '../../tools/prefix.tool';
+import {
+  RawChapter,
+  RawDialog,
+  RawProperty,
+  RawTextDialog,
+} from '../chapter.model';
 import { MultiToken } from './models';
-import { BOOL, CHAPTER, DIALOG, DIALOG_TEXT, EVENT, MEDIA, NEXT, SECTION_REGEX } from './tokens';
-import { extractProp, extractToken, matchSingle, regexSplit } from './tools';
+import {
+  BOOL,
+  CHAPTER,
+  DIALOG,
+  DIALOG_TEXT,
+  EVENT,
+  MEDIA,
+  NEXT,
+  SECTION_REGEX,
+} from './tokens';
+import {
+  extractProp,
+  extractToken,
+  matchSingle,
+  regexSplit,
+} from './tools';
 
 /**
  * Parse chapter files and return its object
  * @param sources text sources to parse
- * @returns 
+ * @returns
  */
 export function parseChapters(sources: string[]): RawChapter[] {
   return sources.flatMap(e => parseRawChapters(e));
