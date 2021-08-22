@@ -17,6 +17,7 @@ import { INTERNAL_HANDLERS } from '../internal/handlers/_index';
 import { LoggerService } from '../logger/logger.service';
 import { ResourcesModule } from '../resources/resources.module';
 import { SystemModule } from '../system/system.module';
+import { setBatatas } from './core.utils';
 import { EngineStore } from './engine.store';
 
 @NgModule({
@@ -29,6 +30,7 @@ import { EngineStore } from './engine.store';
     BodyModule,
     AttributesModule,
     FixationModule,
+    ChapterModule.forRoot(),
     EventsModule.forRoot(INTERNAL_HANDLERS),
     ChapterModule.forRoot(),
   ]
@@ -38,7 +40,8 @@ export class EngineModule {
     logger.engine('Engine module initiated');
   }
 
-  public static forRoot(_?: boolean): ModuleWithProviders<EngineModule> {
+  public static forRoot(isProd?: boolean): ModuleWithProviders<EngineModule> {
+    setBatatas('isDevelopment', !isProd);
     return {
       ngModule: EngineModule,
       providers: []

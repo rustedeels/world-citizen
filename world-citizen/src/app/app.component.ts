@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { EvaluatorService, LoaderService } from '@ngx-batatas/engine';
+import { LoaderService } from '@ngx-batatas/engine';
+
+import { CharInitService } from './characters/char-init.service';
 
 @Component({
   selector: 'wc-root',
@@ -30,16 +32,13 @@ import { EvaluatorService, LoaderService } from '@ngx-batatas/engine';
 })
 export class AppComponent {
   title = 'world-citizen';
-  constructor(loader: LoaderService, evalService: EvaluatorService) {
-    loader.load();
+  constructor(
+    private readonly _loader: LoaderService,
+    private readonly _charInit: CharInitService,
+  ) {}
 
-    setTimeout(() => {
-      evalService.evaluate$('#resCount()')
-      .subscribe(e => console.warn(e));
-      evalService.evaluate$('#resCount2()')
-        .subscribe(e => console.warn(e));
-      evalService.evaluate$('#resCount2() + #resCount()')
-        .subscribe(e => console.warn(e));
-    }, 1000);
+  async initApp() {
+    await this._loader.load();
+    this._charInit.initChars();
   }
 }

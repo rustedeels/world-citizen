@@ -1,6 +1,7 @@
 export * from './attr/index';
 export * from './body/index';
 export * from './body-part/index';
+export * from './chapter/index';
 export * from './char/index';
 export * from './core/index';
 export * from './data-loader/loader.service';

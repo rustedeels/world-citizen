@@ -22,8 +22,6 @@
     ],
     "paths": {
       "@angular/*": [ "./node_modules/@angular/*" ],
-      "@ngx-batatas/core": ["../@ngx-batatas-core/dist"],
-      "@ngx-batatas/parser": ["../@ngx-batatas-parser/dist"],
     }
   },
   "angularCompilerOptions": {

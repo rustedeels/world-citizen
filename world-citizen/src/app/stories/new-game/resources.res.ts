@@ -1,46 +1,47 @@
 import { Resource } from '@ngx-batatas/engine';
-import { ResourceNames } from './resources.mapper';
+
+import { ResourceNames } from './resources.name';
 
 export const STORY_RESOURCES: Resource[] = [
   {
     id: ResourceNames.backAirplane,
-    type: 'image',
+    type: 'background',
     tags: ['airplane'],
     path: '/assets/stories/new-game/back.airplane.jpg',
   },
   {
     id: ResourceNames.backBedroom,
-    type: 'image',
+    type: 'background',
     tags: ['bedroom'],
     path: '/assets/stories/new-game/back.bedroom.jpg',
   },
   {
     id: ResourceNames.backCabin,
-    type: 'image',
+    type: 'background',
     tags: ['cabin'],
     path: '/assets/stories/new-game/back.cabin.jpg',
   },
   {
     id: ResourceNames.backCabinFly,
-    type: 'image',
+    type: 'background',
     tags: ['cabin', 'fly'],
     path: '/assets/stories/new-game/back.cabin_fly.png',
   },
   {
     id: ResourceNames.backCristLxClose,
-    type: 'image',
+    type: 'background',
     tags: ['crist-lx-close'],
     path: '/assets/stories/new-game/back.crist-lx-close.jpg',
   },
   {
     id: ResourceNames.backCristLx,
-    type: 'image',
+    type: 'background',
     tags: ['crist-lx'],
     path: '/assets/stories/new-game/back.crist-lx.jpg',
   },
   {
     id: ResourceNames.backLivingRoom,
-    type: 'image',
+    type: 'background',
     tags: ['living', 'room'],
     path: '/assets/stories/new-game/back.living_room.png',
   },

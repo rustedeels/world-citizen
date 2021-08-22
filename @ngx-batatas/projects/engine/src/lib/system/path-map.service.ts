@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { createDir } from '@tauri-apps/api/fs';
 import { currentDir, dataDir } from '@tauri-apps/api/path';
 import { convertFileSrc } from '@tauri-apps/api/tauri';
+import { getBatatas } from '../core';
 
 import { buildPath, toUnix } from '../tools/path.tools';
 
@@ -34,6 +35,7 @@ export class OSPathMapService {
 
   /** Resolve path in current working directory */
   public resolveCurrentDir(path: string): string {
+    if (getBatatas('isDevelopment')) return path;
     const current = this._currentDir;
     return this.resolvePath(current, path);
   }

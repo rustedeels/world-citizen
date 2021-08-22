@@ -29,6 +29,11 @@ function getTypeByExtension(ext: string): ResourceType {
 
 function getFileType(path: string): ResourceType {
   const d = parse(path);
+
+  if (d.name.indexOf('back') == 0)
+    return 'background';
+  if (d.name.indexOf('img') == 0)
+    return 'image';
   
   for (const t of RES_TYPES) {
     if (d.name.indexOf(t) === 0)
