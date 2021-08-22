@@ -32,7 +32,6 @@ import { EngineStore } from './engine.store';
     FixationModule,
     ChapterModule.forRoot(),
     EventsModule.forRoot(INTERNAL_HANDLERS),
-    ChapterModule.forRoot(),
   ]
 })
 export class EngineModule {

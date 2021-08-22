@@ -1,4 +1,9 @@
-import { Component } from '@angular/core';
+import { Observable } from 'rxjs';
+
+import {
+  Component,
+  OnInit,
+} from '@angular/core';
 import { LoaderService } from '@ngx-batatas/engine';
 
 import { CharInitService } from './characters/char-init.service';
@@ -30,15 +35,15 @@ import { CharInitService } from './characters/char-init.service';
   `,
   styles: []
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'world-citizen';
   constructor(
     private readonly _loader: LoaderService,
     private readonly _charInit: CharInitService,
   ) {}
 
-  async initApp() {
+  public async ngOnInit(): Promise<Observable<boolean>> {
     await this._loader.load();
-    this._charInit.initChars();
+    return this._charInit.initChars();
   }
 }

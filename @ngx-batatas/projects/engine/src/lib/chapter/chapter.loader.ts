@@ -36,11 +36,12 @@ export class ChapterLoader extends BaseEntityGenerator<Chapter, ChaptersGenerato
   protected async generate(item: ChaptersGenerator): Promise<Chapter[]> {
     const res: Chapter[] = [];
 
-    for (const path of item.chapters) {
-      const filePath = this._pathMap.resolveCurrentDir(path);
-      const content = await readTextFile(filePath);
+    for (let path of item.chapters) {
+      const content = await readTextFile('../src' + path);
       res.push(...this.parse(content, item));
     }
+
+    this._logger.engine('Loaded chapters:', res);
 
     return res;
   }

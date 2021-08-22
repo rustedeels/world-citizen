@@ -1,10 +1,16 @@
 import { Injectable } from '@angular/core';
 import { createDir } from '@tauri-apps/api/fs';
-import { currentDir, dataDir } from '@tauri-apps/api/path';
+import {
+  currentDir,
+  dataDir,
+} from '@tauri-apps/api/path';
 import { convertFileSrc } from '@tauri-apps/api/tauri';
-import { getBatatas } from '../core';
 
-import { buildPath, toUnix } from '../tools/path.tools';
+import { getBatatas } from '../core/core.utils';
+import {
+  buildPath,
+  toUnix,
+} from '../tools/path.tools';
 
 /** Map OS paths to running context */
 @Injectable({ providedIn: 'platform' })
@@ -35,7 +41,9 @@ export class OSPathMapService {
 
   /** Resolve path in current working directory */
   public resolveCurrentDir(path: string): string {
-    if (getBatatas('isDevelopment')) return path;
+    if (getBatatas('isDevelopment')) {
+      return path;
+    }
     const current = this._currentDir;
     return this.resolvePath(current, path);
   }
