@@ -1,12 +1,23 @@
 import { Injectable } from '@angular/core';
 
-import { CharAttributes, CoreAttr } from '../../attr/attr.model';
+import {
+  CharAttributes,
+  CoreAttr,
+} from '../../attr/attr.model';
 import { AttributeService } from '../../attr/attr.service';
 import { CharAttributesStore } from '../../attr/char-attr.store';
-import { BodyParts, BodyStore, CharBody, EquipSlot } from '../../body';
+import {
+  BodyParts,
+  BodyStore,
+  CharBody,
+  EquipSlot,
+} from '../../body';
 import { BodyPartId } from '../../body-part';
 import { BodyPartService } from '../../body-part/body-part.service';
-import { Char, CharInit } from '../../char/char.model';
+import {
+  Char,
+  CharInit,
+} from '../../char/char.model';
 import { CharStore } from '../../char/char.store';
 import { EventHandler } from '../../events/decorator';
 import { LoggerService } from '../../logger/logger.service';
@@ -25,27 +36,31 @@ export class CharEventsHandler {
   ) {}
 
   @EventHandler('charInit')
-  public onCharInit(init?: CharInit): void {
+  public onCharInit(init?: CharInit | CharInit[]): void {
     if (!init) {
       this._logger.warning('An empty char init was emited');
       return;
     }
 
-    const char: Char = {
-      id: init.id,
-      name: init.name,
-      portrait: '',
-      birth: getDateString(init.birth),
-      gender: init.gender,
-      surname: init.surname,
-    }
-    const body = this.buildBody(init.id, init.body);
-    const attr = this.getCoreAttributes(init.id);
+    const charList: [Char, CharInit][] = (Array.isArray(init) ? init : [init])
+      .map(c => ([{
+        id: c.id,
+        name: c.name,
+        portrait: '',
+        birth: getDateString(c.birth),
+        gender: c.gender,
+        surname: c.surname,
+      }, c]))
 
-    this._charStore.add(char);
-    this._bodyStore.add(body);
-    this._attrStore.add(attr);
-    this._charStore.setPortrait(char.id, init.resourceId);
+    for (const [char, i] of charList) {
+      const body = this.buildBody(i.id, i.body);
+      const attr = this.getCoreAttributes(i.id);
+
+      this._charStore.add(char);
+      this._bodyStore.add(body);
+      this._attrStore.add(attr);
+      this._charStore.setPortrait(char.id, i.resourceId);
+    }
   }
 
   private buildBody(id: string, parts?: BodyPartId[]): CharBody {

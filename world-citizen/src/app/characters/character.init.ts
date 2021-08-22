@@ -10,7 +10,7 @@ import { CharacterNames } from './character.name';
 export const CHARACTERS: CharInit[] = [
   {
     id: PLAYER_ID,
-    birth: new Date(1989, 6, 10),
+    birth: new Date(1989, 5, 10),
     gender: 50,
     name: 'Player',
     surname: '',
@@ -19,7 +19,7 @@ export const CHARACTERS: CharInit[] = [
   },
   {
     id: CharacterNames.pilot,
-    birth: new Date(1958, 8, 7),
+    birth: new Date(1958, 7, 7),
     gender: -50,
     name: 'Pilot',
     surname: '',

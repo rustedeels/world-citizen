@@ -1,6 +1,11 @@
 import { Subscription } from 'rxjs';
 
-import { Injectable, InjectionToken, OnDestroy, Type } from '@angular/core';
+import {
+  Injectable,
+  InjectionToken,
+  OnDestroy,
+  Type,
+} from '@angular/core';
 
 import { Prefix } from '../constants';
 import { isObjectValue } from '../guards/object.guards';
@@ -92,7 +97,7 @@ export class EventsInitializer implements OnDestroy {
       if (typeof method !== 'function') continue;
 
       this._logger.engine('Init handler for event:', eventName)
-      this.subs.push(this._events.subscribe(eventName, method));
+      this.subs.push(this._events.subscribe(eventName, method.bind(target)));
     }
   }
 }

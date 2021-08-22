@@ -37,7 +37,8 @@ export class ChapterLoader extends BaseEntityGenerator<Chapter, ChaptersGenerato
     const res: Chapter[] = [];
 
     for (let path of item.chapters) {
-      const content = await readTextFile('../src' + path);
+      const relativePath = this._pathMap.resolvePhysicalPath(path);
+      const content = await readTextFile(relativePath);
       res.push(...this.parse(content, item));
     }
 

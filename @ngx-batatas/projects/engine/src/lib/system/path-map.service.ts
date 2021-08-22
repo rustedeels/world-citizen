@@ -53,4 +53,8 @@ export class OSPathMapService {
     const baseDir = this._dataDir;
     return this.resolvePath(baseDir, path);
   }
+
+  public resolvePhysicalPath(path: string): string {
+    return getBatatas('isDevelopment') ? '../src' + path : path;
+  }
 }

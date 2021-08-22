@@ -1,5 +1,7 @@
+import { printNum } from './num.tools';
+
 export function getDateString(d: Date): `${number}-${number}-${number}` {
-  return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}` as any;
+  return `${d.getFullYear()}-${printNum(d.getMonth() + 1)}-${printNum(d.getDate())}` as any;
 }
 
 export function getDate(date: `${number}-${number}-${number}`): Date {

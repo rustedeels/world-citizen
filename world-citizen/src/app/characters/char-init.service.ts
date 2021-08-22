@@ -1,8 +1,8 @@
+import { Observable } from 'rxjs';
 import {
-  forkJoin,
-  Observable,
-} from 'rxjs';
-import { map } from 'rxjs/operators';
+  map,
+  take,
+} from 'rxjs/operators';
 
 import { Injectable } from '@angular/core';
 import {
@@ -21,14 +21,16 @@ export class CharInitService {
   ) {}
 
   public initChars(): Observable<boolean> {
-    const chars = CHARACTERS.map(c => this._charQuery
-      .selectEntity(c.id).pipe(map(res => ({ exists: !!res, char: c }))))
-    return forkJoin(chars).pipe(
-      map(res => {
-        this._events.emit('charInit', res.filter(e => !e.exists).map(e => e.char));
-
-        return true;
-      })
-    )
+    return this._charQuery.selectAll()
+      .pipe(
+        take(1),
+        map(storeChars => CHARACTERS
+          .filter(e => storeChars.findIndex(c => c.id === e.id) === -1)),
+        map(toAdd => {
+          if (!toAdd) return false;
+          this._events.emit('charInit', toAdd);
+          return true;
+        })
+      )
   }
 }

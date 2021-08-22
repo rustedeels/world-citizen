@@ -1,4 +1,4 @@
-import { Observable } from 'rxjs';
+
 
 import {
   Component,
@@ -42,8 +42,8 @@ export class AppComponent implements OnInit {
     private readonly _charInit: CharInitService,
   ) {}
 
-  public async ngOnInit(): Promise<Observable<boolean>> {
+  public async ngOnInit(): Promise<void> {
     await this._loader.load();
-    return this._charInit.initChars();
+    await this._charInit.initChars().toPromise();
   }
 }
