@@ -15,6 +15,7 @@ import { FixationModule } from '../fixation/fixation.module';
 import { INTERNAL_EVALUATORS } from '../internal/evaluators/_index';
 import { INTERNAL_HANDLERS } from '../internal/handlers/_index';
 import { LoggerService } from '../logger/logger.service';
+import { PlayAreaModule } from '../playarea/playarea.module';
 import { ResourcesModule } from '../resources/resources.module';
 import { SystemModule } from '../system/system.module';
 import { setBatatas } from './core.utils';
@@ -32,7 +33,9 @@ import { EngineStore } from './engine.store';
     FixationModule,
     ChapterModule.forRoot(),
     EventsModule.forRoot(INTERNAL_HANDLERS),
-  ]
+    PlayAreaModule,
+  ],
+  exports: [PlayAreaModule]
 })
 export class EngineModule {
   public constructor(_: EngineStore, logger: LoggerService, zone: NgZone) {

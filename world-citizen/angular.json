@@ -52,6 +52,7 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/@ngx-batatas/engine/batatas.scss",
               "src/styles.scss"
             ],
             "scripts": [],

@@ -4,5 +4,6 @@
   "lib": {
     "entryFile": "src/public-api.ts"
   },
-  "deleteDestPath": true
+  "deleteDestPath": true,
+  "assets": ["./batatas.scss", "./batatas-settings.scss", "./styles"]
 }

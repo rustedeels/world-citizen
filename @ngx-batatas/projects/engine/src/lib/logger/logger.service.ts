@@ -1,8 +1,11 @@
-import { v4 as uuid } from 'uuid';
-
 import { Injectable } from '@angular/core';
 
-import { isLogOptionExtra, LogLevel, LogOption, LogOptionExtra } from './logger.model';
+import {
+  isLogOptionExtra,
+  LogLevel,
+  LogOption,
+  LogOptionExtra,
+} from './logger.model';
 
 @Injectable({ providedIn: 'platform'})
 export class LoggerService {
@@ -15,7 +18,7 @@ export class LoggerService {
   }
 
   public startTimer(): string {
-    const name = uuid();
+    const name = `Timer[${Math.random().toString()}]`;
     console.time(name);
     return name;
   }
