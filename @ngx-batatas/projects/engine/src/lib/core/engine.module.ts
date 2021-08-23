@@ -18,7 +18,8 @@ import { LoggerService } from '../logger/logger.service';
 import { PlayAreaModule } from '../playarea/playarea.module';
 import { ResourcesModule } from '../resources/resources.module';
 import { SystemModule } from '../system/system.module';
-import { setBatatas } from './core.utils';
+import { setGlobalState } from './core.utils';
+import { BatatasState } from './engine.model';
 import { EngineStore } from './engine.store';
 
 @NgModule({
@@ -42,8 +43,8 @@ export class EngineModule {
     logger.engine('Engine module initiated');
   }
 
-  public static forRoot(isProd?: boolean): ModuleWithProviders<EngineModule> {
-    setBatatas('isDevelopment', !isProd);
+  public static forRoot(state?: Partial<BatatasState>): ModuleWithProviders<EngineModule> {
+    if (state) setGlobalState(state);
     return {
       ngModule: EngineModule,
       providers: []

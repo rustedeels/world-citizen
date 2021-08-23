@@ -28,7 +28,10 @@ import { StoryModule } from './stories/story.module';
     LoggerModule.forLevel(LogLevel.all, true),
     EvaluatorModule.forEvaluators([ResourceCountEval2]),
     ResModule,
-    EngineModule.forRoot(environment.production),
+    EngineModule.forRoot({
+      appName: 'world-citizen',
+      isDevelopment: !environment.production,
+    }),
     StoryModule,
   ],
   providers: [],

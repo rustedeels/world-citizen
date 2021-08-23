@@ -6,6 +6,5 @@ export interface EngineState {
 
 export interface BatatasState {
   isDevelopment: boolean;
-  soundVolume: number;
-  musicVolume: number;
+  appName: string;
 }

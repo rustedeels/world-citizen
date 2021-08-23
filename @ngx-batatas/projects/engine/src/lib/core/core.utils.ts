@@ -8,14 +8,12 @@ type BatatasKey = keyof BatatasState;
 
 const GLOBAL_MAP: { [key in BatatasKey]: Symbol } = {
   isDevelopment: Symbol('batatas_isDevelopment'),
-  musicVolume: Symbol('batatas_musicVolume'),
-  soundVolume: Symbol('batatas_soundVolume'),
+  appName: Symbol('batatas_app_name'),
 }
 
 const DEFAULT: { [key in BatatasKey]: BatatasState[key] } = {
   isDevelopment: false,
-  musicVolume: 1,
-  soundVolume: 1,
+  appName: 'BatatasEngineApp'
 }
 
 export function setBatatas<T extends BatatasKey>(key: T, value: BatatasState[T]) {
@@ -27,4 +25,12 @@ export function getBatatas<T extends BatatasKey>(key: T): BatatasState[T] {
   const symbol = GLOBAL_MAP[key] as symbol;
   const defaultValue = DEFAULT[key];
   return (getGlobal(symbol) ?? defaultValue) as BatatasState[T];
+}
+
+export function setGlobalState(state: Partial<BatatasState>): void {
+  for (const key in state) {
+    const value = state[key as BatatasKey];
+    if (typeof value === 'undefined') continue;
+    setBatatas(key as BatatasKey, value);
+  }
 }
