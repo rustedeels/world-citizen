@@ -1,0 +1,32 @@
+.flex, .f {
+  display: flex;
+
+  &-grow-1 {
+    flex-grow: 1;
+  }
+
+  &-grow-0 {
+    flex-grow: 0;
+  }
+
+  &-center {
+    justify-content: center;
+    align-items: center;
+  }
+
+  &-row {
+    flex-direction: row;
+  }
+
+  &-column {
+    flex-direction: column;
+  }
+
+  &-jc-start {
+    justify-content: flex-start;
+  }
+
+  &-ai-center {
+    align-items: center;
+  }
+}

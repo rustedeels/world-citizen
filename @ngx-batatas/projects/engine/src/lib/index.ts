@@ -16,3 +16,4 @@ export * from './resources/index';
 export * from './states/index';
 export * from './system/index';
 export * from './tauri/api/index';
+export * from './widgets/_index';

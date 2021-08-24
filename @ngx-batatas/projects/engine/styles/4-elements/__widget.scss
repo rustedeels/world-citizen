@@ -1,0 +1,13 @@
+/** Reset defaults */
+.bt-widget {
+  border-radius: 0;
+  outline: none;
+  border: none;
+
+  &.disabled {
+    opacity: 0.8;
+    cursor: default;
+    user-select: none;
+    pointer-events: none;
+  }
+}

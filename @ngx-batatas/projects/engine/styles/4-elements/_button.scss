@@ -1,0 +1,29 @@
+.bt-widget.bt-button {
+  cursor: pointer;
+  background-color: $color-primary;
+  border: 1px solid $color-primary;
+  opacity: 0.9;
+  font-size: 1rem;
+  margin: 1px;
+  color: $color-accent;
+  border-bottom-color: $color-active;
+
+  &:hover:not(.disabled) {
+    opacity: 1;
+  }
+
+  &:focus:not(.disabled) {
+    border-color: $color-active;
+  }
+
+  &:active:not(.disabled) {
+    border-color: $color-active;
+    border-width: 2px;
+    margin: 0;
+  }
+}
+
+.btn-full {
+  width: 100%;
+  & > .bt-button { width: 100%; }
+}

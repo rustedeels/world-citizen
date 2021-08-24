@@ -7,4 +7,6 @@ export interface EngineState {
 export interface BatatasState {
   isDevelopment: boolean;
   appName: string;
+  developer: string;
+  title: string;
 }

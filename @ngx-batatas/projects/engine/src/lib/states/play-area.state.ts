@@ -12,6 +12,6 @@ export interface PlayAreaState {
 @Injectable({ providedIn: 'platform' })
 export class PlayAreaStateMachine extends StateMachine<PlayAreaState> {
   public constructor() {
-    super('credits');
+    super('loading');
   }
 }

@@ -12,7 +12,14 @@ import { SettingsService } from '../system/settings.service';
 
 @Component({
   selector: 'batatas-play-area',
-  template: `<div class="play-area">PlayArea</div>`
+  template: `
+<div class="bt-play-area full-screen">
+  <ng-container [ngSwitch]="state">
+    <bt-loading-screen *ngSwitchCase="'loading'" ></bt-loading-screen>
+    <bt-main-menu *ngSwitchCase="'mainMenu'" ></bt-main-menu>
+    <div *ngSwitchDefault></div>
+  </ng-container>
+</div>`
 })
 export class PlayAreaComponent implements OnInit {
   public state: Extract<keyof PlayAreaState, string> | 'waiting' = 'waiting';

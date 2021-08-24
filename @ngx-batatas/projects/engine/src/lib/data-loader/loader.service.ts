@@ -17,8 +17,8 @@ export class LoaderService {
     this._logger.engine('Registering loader: ' + name);
   }
 
-  public async load(): Promise<void> {
-    var report = new ProgressReport();
+  public async load(progress?: ProgressReport): Promise<void> {
+    var report = progress ?? new ProgressReport();
     // Preload
     for (const l of this._loaders.values()) { l.preload(report); }
 

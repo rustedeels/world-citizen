@@ -1,0 +1,29 @@
+.bt-loading-screen {
+  .progress-bar {
+    min-height: 2rem;
+    height: 2rem;
+    width: 95%;
+    margin: 5px 0;
+    border-radius: 5px;
+    border: 2px solid $color-accent;
+    position: relative;
+    z-index: 10;
+
+    &__status {
+      height: 100%;
+      background-color: $color-active;
+      z-index: 9;
+      border-radius: 4px;
+    }
+  }
+
+  .dev-banner {
+    width: 95%;
+    margin: 5px 0;
+    margin-left: 2.5%;
+  }
+
+  .game-banner {
+    margin: 3rem;
+  }
+}

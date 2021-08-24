@@ -31,6 +31,8 @@ import { StoryModule } from './stories/story.module';
     EngineModule.forRoot({
       appName: 'world-citizen',
       isDevelopment: !environment.production,
+      developer: 'Rustedeels',
+      title: 'World Citizen'
     }),
     StoryModule,
   ],

@@ -56,6 +56,7 @@ export abstract class BaseLoader<T extends { id: string }> {
     if (!this.__toAdd?.length) return;
 
     for (const i of this.__toAdd) {
+      // await sleep();
       const [success, msg, extra] = await this.loadItem(i);
       if (!success) { this.logError(msg ?? 'unkown', i, extra) }
       report.reportProgress();
@@ -72,4 +73,12 @@ export abstract class BaseLoader<T extends { id: string }> {
       extra
     );
   }
+}
+
+function sleep(): Promise<void> {
+  return new Promise(res => {
+    setTimeout(() => {
+      res();
+    }, 50);
+  });
 }

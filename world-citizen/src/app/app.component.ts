@@ -4,7 +4,6 @@ import {
   Component,
   OnInit,
 } from '@angular/core';
-import { LoaderService } from '@ngx-batatas/engine';
 
 import { CharInitService } from './characters/char-init.service';
 
@@ -18,12 +17,10 @@ import { CharInitService } from './characters/char-init.service';
 export class AppComponent implements OnInit {
   title = 'world-citizen';
   constructor(
-    private readonly _loader: LoaderService,
     private readonly _charInit: CharInitService,
   ) {}
 
   public async ngOnInit(): Promise<void> {
-    await this._loader.load();
-    await this._charInit.initChars().toPromise();
+    // await this._charInit.initChars().toPromise();
   }
 }
