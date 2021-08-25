@@ -70,15 +70,12 @@ function mapMedia(raw: RawProperty[], res: StringMap<string>, logger: LoggerServ
   const result: Media[] = [];
 
   for (const m of raw) {
-    const props = m.props.split('|');
-    const loop = props.indexOf('LOOP') !== -1;
-    const end = props.indexOf('INF') === -1;
+    const attr = m.props.split('|');
 
     if (isEvalName(m.name)) {
       result.push({
+        attr,
         loader: m.name,
-        loop,
-        end,
         bool: m.bool
       });
       continue;
@@ -92,8 +89,7 @@ function mapMedia(raw: RawProperty[], res: StringMap<string>, logger: LoggerServ
 
     result.push({
       bool: m.bool,
-      loop,
-      end,
+      attr,
       id,
     });
   }

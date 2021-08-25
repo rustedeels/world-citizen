@@ -2,7 +2,12 @@ import { Component } from '@angular/core';
 import { exit } from '@tauri-apps/api/process';
 
 import { getBatatas } from '../../core/core.utils';
+import {
+  BatatasEventsMap,
+  EventsService,
+} from '../../events';
 import { LoggerService } from '../../logger';
+import { PlayAreaStateMachine } from '../../states';
 
 @Component({
   selector: 'bt-main-menu',
@@ -16,9 +21,16 @@ import { LoggerService } from '../../logger';
   </div>
   <div class="f-grow-1 bt-main-menu__content">
     <div class="buttons">
-      <bt-button>New Game</bt-button>
+      <bt-button (press)="onNewGame()" >New Game</bt-button>
+      <bt-button
+        *ngIf="isPauseMenu"
+      >Save Game</bt-button>
       <bt-button>Load Game</bt-button>
       <bt-button>Settings</bt-button>
+      <bt-button
+        *ngIf="isPauseMenu"
+        (press)="return()"
+      >Return</bt-button>
       <bt-button (press)="onExit()" >Exit</bt-button>
     </div>
     <div class="active-content">
@@ -35,8 +47,14 @@ export class MainMenuComponent {
   public readonly title: string;
   public readonly developer: string;
 
+  public get isPauseMenu() {
+    return this._state.getPrevState() === 'gameEngine';
+  }
+
   public constructor(
     private readonly _logger: LoggerService,
+    private readonly _events: EventsService<BatatasEventsMap>,
+    private readonly _state: PlayAreaStateMachine,
   ) {
     this.title = getBatatas('title');
     this.developer = getBatatas('developer');
@@ -45,5 +63,15 @@ export class MainMenuComponent {
   public onExit() {
     this._logger.engine('Exiting game');
     exit(0);
+  }
+
+  public onNewGame() {
+    this._events.emit('newGameInit');
+    this._state.nextState('gameEngine');
+  }
+
+  public return() {
+    if (!this.isPauseMenu) this.return;
+    this._state.prevState();
   }
 }

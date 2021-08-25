@@ -13,4 +13,6 @@ export interface BatatasEventsMap {
   gameLoaded: never;
   /** A new character was added */
   charInit: CharInit | CharInit[];
+  /** Show/Hide pause menu */
+  togglePauseMenu: never;
 }

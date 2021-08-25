@@ -37,22 +37,16 @@ export type Media = MediaStatic | MediaDynamic;
 export interface MediaStatic {
   /** Resource id */
   id: string;
-  /** Loop until stopped or conxtext ends */
-  loop: boolean;
-  /** Stop when context ends */
-  end: boolean;
-  /** Expression to define if is valid */
+  /** Attributes */
+  attr: string [];
   bool: string;
 }
 
 export interface MediaDynamic {
   /** Expression to load resource id */
   loader: string;
-  /** Loop until stopped or conxtext ends */
-  loop: boolean;
-  /** Stop when context ends */
-  end: boolean;
-  /** Expression to define if is valid */
+  /** Attributes */
+  attr: string [];
   bool: string;
 }
 

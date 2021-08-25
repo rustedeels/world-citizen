@@ -3,6 +3,7 @@ import {
   OnInit,
 } from '@angular/core';
 
+import { GlobalHotkeysService } from '../hotkeys/global-hotkeys.service';
 import { LoggerService } from '../logger';
 import {
   PlayAreaState,
@@ -17,6 +18,7 @@ import { SettingsService } from '../system/settings.service';
   <ng-container [ngSwitch]="state">
     <bt-loading-screen *ngSwitchCase="'loading'" ></bt-loading-screen>
     <bt-main-menu *ngSwitchCase="'mainMenu'" ></bt-main-menu>
+    <bt-game-engine *ngSwitchCase="'gameEngine'"></bt-game-engine>
     <div *ngSwitchDefault></div>
   </ng-container>
 </div>`
@@ -28,6 +30,7 @@ export class PlayAreaComponent implements OnInit {
     private readonly _settingsService: SettingsService,
     private readonly _stateMachine: PlayAreaStateMachine,
     private readonly _logger: LoggerService,
+    private readonly _hotkeys: GlobalHotkeysService,
   ) { }
 
   public async ngOnInit() {
@@ -36,5 +39,6 @@ export class PlayAreaComponent implements OnInit {
       this._logger.engine('PlayArea:', e);
       this.state = e;
     });
+    this._hotkeys.setTarget(document);
   }
 }
