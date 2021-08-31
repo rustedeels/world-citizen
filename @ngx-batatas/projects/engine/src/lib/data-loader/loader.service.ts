@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { LoggerService } from '../logger';
+import { InitService } from '../system/init.service';
 import { BaseLoader } from './base-loader';
 import { ProgressReport } from './progress-report';
 
@@ -10,6 +11,7 @@ export class LoaderService {
 
   public constructor(
     private readonly _logger: LoggerService,
+    private readonly _init: InitService,
   ) {}
 
   public addLoader(name: string, loader: BaseLoader<any>): void {
@@ -33,5 +35,7 @@ export class LoaderService {
       this._logger.engine('Loading for ' + name);
       await l.load(report);
     }
+
+    await this._init.init();
   }
 }

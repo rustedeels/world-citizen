@@ -42,6 +42,17 @@ export abstract class HotkeyHandler {
     };
   }
 
+  public removeHotkey(builder: Partial<HotkeyBuilder>): void {
+    const b: HotkeyBuilder = {
+      preventDefault: false,
+      keys: [],
+      event: '',
+      ...builder,
+    };
+
+    delete this.__map[serializeHotkey(b)];
+  }
+
   public setTarget(elem?: HotkeyTarget): void {
     this.__target?.removeEventListener('keyup', this.KEY_UP_LISTNER);
     this.__target?.removeEventListener('keydown', this.KEY_DOWN_LISTNER);

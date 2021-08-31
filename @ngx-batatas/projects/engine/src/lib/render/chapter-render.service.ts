@@ -19,8 +19,15 @@ import {
 import { CharQuery } from '../char/char.query';
 import { BoolEvaluatorService } from '../evaluator/bool-evaluator.service';
 import { EvaluatorService } from '../evaluator/evaluator.service';
+import { BatatasEventsMap } from '../events/batatas.events';
+import { EventsService } from '../events/events.service';
+import { GlobalHotkeysService } from '../hotkeys/global-hotkeys.service';
 import { LoggerService } from '../logger/logger.service';
 import { ResourcesQuery } from '../resources/resources.query';
+import {
+  ServiceInit,
+  ServiceReset,
+} from '../shared/service.model';
 import { SubscriberManager } from '../tools/rxjs.tools';
 import {
   ChapterRender,
@@ -34,12 +41,14 @@ import { RenderStore } from './render.store';
 type SubNames = 'chapter' | 'char' | 'dialog' | 'dialogText'
 
 @Injectable({ providedIn: 'platform' })
-export class ChapterRenderService {
+export class ChapterRenderService implements ServiceInit, ServiceReset {
   private readonly _subs = new SubscriberManager<SubNames>();
 
   private _dialogs: Dialog[] = [];
   private _texts: DialogText[] = [];
   private _chars: string[] = [];
+
+  private __init = false;
 
   public constructor(
     private readonly _logger: LoggerService,
@@ -50,11 +59,40 @@ export class ChapterRenderService {
     private readonly _renderQuery: RenderQuery,
     private readonly _evalService: EvaluatorService,
     private readonly _boolEval: BoolEvaluatorService,
+    private readonly _hotkeys: GlobalHotkeysService,
+    private readonly _events: EventsService<BatatasEventsMap>,
   ) {}
+
+  public async init(): Promise<void> {
+    if (this.__init) return;
+    this.__init = true;
+
+    this._chapterQuery.selectActive()
+      .subscribe(chapter => {
+        if (!chapter) return;
+
+        this.renderChapter(chapter);
+      });
+
+    this._hotkeys.addHotkey({
+      event: 'chapterGoNext',
+      keys: [' '],
+    });
+
+    this._events.subscribe('chapterGoNext', () => {
+      const isChapter = this._renderQuery.getValue().state === 'chapter';
+      if (isChapter) this.goNext();
+    });
+  }
+
+  public async reset(): Promise<void> {
+    this._renderStore.reset();
+  }
 
   public goNext(): boolean {
     const diagIndex = this._renderQuery.getValue().chapter.dialogIndex;
     const textIndex = this._renderQuery.getValue().chapter.textIndex;
+    console.warn(diagIndex, textIndex);
 
     if (diagIndex < 0 || textIndex < 0) {
       this._renderStore.updateChapter({ dialogIndex: 0, textIndex: 0 });
@@ -93,10 +131,8 @@ export class ChapterRenderService {
     return false;
   }
 
-  public async renderChapter(id: string): Promise<void> {
+  public async renderChapter(chapter?: Chapter): Promise<void> {
     this._subs.clear();
-    const chapter = this._chapterQuery.getEntity(id);
-    if (!chapter) { this._logger.warning('Chapter id not found', id); }
     this.loadChapter(chapter);
   }
 

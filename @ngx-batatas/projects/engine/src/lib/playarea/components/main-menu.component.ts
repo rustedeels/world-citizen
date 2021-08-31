@@ -8,6 +8,7 @@ import {
 } from '../../events';
 import { LoggerService } from '../../logger';
 import { PlayAreaStateMachine } from '../../states';
+import { ResetService } from '../../system/reset.service';
 
 @Component({
   selector: 'bt-main-menu',
@@ -55,6 +56,7 @@ export class MainMenuComponent {
     private readonly _logger: LoggerService,
     private readonly _events: EventsService<BatatasEventsMap>,
     private readonly _state: PlayAreaStateMachine,
+    private readonly _reset: ResetService,
   ) {
     this.title = getBatatas('title');
     this.developer = getBatatas('developer');
@@ -65,7 +67,8 @@ export class MainMenuComponent {
     exit(0);
   }
 
-  public onNewGame() {
+  public async onNewGame() {
+    await this._reset.reset();
     this._events.emit('newGameInit');
     this._state.nextState('gameEngine');
   }

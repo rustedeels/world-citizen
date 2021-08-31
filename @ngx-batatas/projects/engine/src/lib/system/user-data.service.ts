@@ -7,16 +7,19 @@ import {
 import { dataDir } from '@tauri-apps/api/path';
 
 import { getBatatas } from '../core/core.utils';
+import { ServiceInit } from '../shared/service.model';
 import { getDateTimeString } from '../tools/date.tools';
 import { UserData } from './system.model';
 
 @Injectable({ providedIn: 'platform' })
-export class UserDataService {
+export class UserDataService implements ServiceInit {
 
   /** Ensures base directory is created */
   public async ensureBaseDir(): Promise<void> {
     await this.getBasePath('saves');
   }
+
+  public init() { return this.ensureBaseDir(); }
 
   /**
    * Save object into JSON file

@@ -1,3 +1,4 @@
+export * from './init.service';
 export * from './navigation.service';
 export * from './path-map.service';
 export * from './settings.service';

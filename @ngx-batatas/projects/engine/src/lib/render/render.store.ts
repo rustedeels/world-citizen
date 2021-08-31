@@ -12,7 +12,7 @@ import {
   RenderStoreName,
 } from './render.model';
 
-@StoreConfig({ name: RenderStoreName })
+@StoreConfig({ name: RenderStoreName, resettable: true })
 @Injectable({ providedIn: 'platform' })
 export class RenderStore extends Store<RenderState> {
   public constructor() { super(createInitialState()); }

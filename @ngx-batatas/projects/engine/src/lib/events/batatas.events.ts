@@ -15,4 +15,7 @@ export interface BatatasEventsMap {
   charInit: CharInit | CharInit[];
   /** Show/Hide pause menu */
   togglePauseMenu: never;
+
+  /** If in chapter state, go to next state */
+  chapterGoNext: never;
 }

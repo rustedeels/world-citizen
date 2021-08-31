@@ -7,6 +7,7 @@ import {
 import { convertFileSrc } from '@tauri-apps/api/tauri';
 
 import { getBatatas } from '../core/core.utils';
+import { ServiceInit } from '../shared/service.model';
 import {
   buildPath,
   toUnix,
@@ -14,11 +15,13 @@ import {
 
 /** Map OS paths to running context */
 @Injectable({ providedIn: 'platform' })
-export class OSPathMapService {
+export class OSPathMapService implements ServiceInit {
   private _currentDir = '/';
   private _dataDir = '/';
 
   public constructor () {}
+
+  public init() { return this.refresh(); }
 
   public async refresh(): Promise<void> {
     this._currentDir = await currentDir();
