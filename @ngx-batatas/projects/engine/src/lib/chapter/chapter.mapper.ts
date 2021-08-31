@@ -49,6 +49,7 @@ function mapToChapter(
   return {
     id: raw.name,
     name: raw.name,
+    timeout: raw.timeout,
     actions: mapActions(raw.actions),
     media: mapMedia(raw.media, resMap, logger),
     next: mapNext(raw.next, prefix),

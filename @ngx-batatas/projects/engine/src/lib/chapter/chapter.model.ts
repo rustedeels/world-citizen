@@ -8,6 +8,7 @@ import { StringMap } from '../shared/utils.model';
 export interface RawChapter {
   name: string;
   bool: string;
+  timeout: number;
   party: RawProperty[];
   dialog: RawDialog[];
   media: RawProperty[];
@@ -103,6 +104,7 @@ export interface Chapter {
   next: NextChapter[];
   actions: ChapterAction[];
   bool: string;
+  timeout: number;
 }
 
 export interface ChaptersGenerator {

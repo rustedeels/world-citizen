@@ -15,6 +15,7 @@ import {
   MEDIA,
   NEXT,
   SECTION_REGEX,
+  TIMEOUT,
 } from './tokens';
 import {
   extractProp,
@@ -51,6 +52,7 @@ function parseRawChapter(src: string, prefix: string): RawChapter {
     name,
     party,
     bool: extractToken(chapter, BOOL),
+    timeout: getTimeout(chapter),
     actions: multiProp(chapter, EVENT),
     media: multiProp(chapter, MEDIA),
     next: multiProp(chapter, NEXT),
@@ -99,6 +101,11 @@ function parseDialogText(src: string): RawTextDialog {
     bool: extractToken(src, BOOL),
     media: multiProp(src, MEDIA)
   }
+}
+
+function getTimeout(part: string): number {
+  const timeout = Number(extractToken(part, TIMEOUT));
+  return (!isNaN(timeout) && isFinite(timeout)) ? timeout : 0;
 }
 
 const multiProp = (src: string, token: MultiToken)=>

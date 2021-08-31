@@ -1,4 +1,7 @@
-import { MultiToken, SingleToken } from './models';
+import {
+  MultiToken,
+  SingleToken,
+} from './models';
 
 export const CHAPTER: SingleToken = {
   regex: /^#\s(.*)/gm,
@@ -8,6 +11,11 @@ export const CHAPTER: SingleToken = {
 export const BOOL: SingleToken = {
   multi: false,
   regex: /^\!\s(.*)/gm
+}
+
+export const TIMEOUT: SingleToken = {
+  multi: false,
+  regex: /^T\s(\d+)/gm
 }
 
 export const MEDIA: MultiToken = {

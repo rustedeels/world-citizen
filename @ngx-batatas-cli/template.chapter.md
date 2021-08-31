@@ -6,6 +6,7 @@ my-prefix
 $ actionNoParam[]()
 $ actionParam[100]()
 $ actionConditional[{ name: #partyName(1) }](#hasParty(1))
+T 3000
 > go to chapter 2[chapter2]()
 > go to chapter 3[chapter3](#hasParty(1))
 
