@@ -12,6 +12,7 @@ export * from './fixation/index';
 export * from './guards/index';
 export * from './logger/index';
 export * from './playarea/index';
+export * from './render/_index';
 export * from './resources/index';
 export * from './states/index';
 export * from './system/index';

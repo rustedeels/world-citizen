@@ -1,4 +1,7 @@
-import { EntityState } from '@datorama/akita';
+import {
+  ActiveState,
+  EntityState,
+} from '@datorama/akita';
 
 import { StringMap } from '../shared/utils.model';
 
@@ -109,6 +112,5 @@ export interface ChaptersGenerator {
   chapters: string[];
 }
 
-
-export interface ChapterState extends EntityState<Chapter, string> {}
+export interface ChapterState extends EntityState<Chapter, string>, ActiveState {}
 export const ChapterStoreName = '$chapters';

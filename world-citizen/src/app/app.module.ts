@@ -4,16 +4,13 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {
   EngineModule,
-  EvaluatorModule,
   EventsModule,
   LoggerModule,
   LogLevel,
 } from '@ngx-batatas/engine';
 
 import { AppComponent } from './app.component';
-import { HandlerService } from './handler.service';
-import { NewModule } from './new.module';
-import { ResourceCountEval2 } from './res-count.eval';
+import { NewGameHandler } from './new-game.handler';
 import { ResModule } from './resources/res.module';
 import { StoryModule } from './stories/story.module';
 
@@ -23,10 +20,8 @@ import { StoryModule } from './stories/story.module';
   ],
   imports: [
     BrowserModule,
-    NewModule,
-    EventsModule.forHandlers([HandlerService]),
+    EventsModule.forHandlers([NewGameHandler]),
     LoggerModule.forLevel(LogLevel.all, true),
-    EvaluatorModule.forEvaluators([ResourceCountEval2]),
     ResModule,
     EngineModule.forRoot({
       appName: 'world-citizen',

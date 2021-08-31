@@ -1,7 +1,13 @@
 import { Injectable } from '@angular/core';
-import { EntityStore, StoreConfig } from '@datorama/akita';
+import {
+  EntityStore,
+  StoreConfig,
+} from '@datorama/akita';
 
-import { ChapterState, ChapterStoreName } from './chapter.model';
+import {
+  ChapterState,
+  ChapterStoreName,
+} from './chapter.model';
 
 @StoreConfig({ name: ChapterStoreName })
 @Injectable({ providedIn: 'platform' })

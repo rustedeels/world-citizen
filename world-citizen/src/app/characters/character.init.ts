@@ -23,7 +23,7 @@ export const CHARACTERS: CharInit[] = [
     gender: -50,
     name: 'Pilot',
     surname: '',
-    body: [],
+    body: ['dick', 'flatChest', 'shortHair'],
     resourceId: NewGameResources.portraitPilot
   }
 ];
