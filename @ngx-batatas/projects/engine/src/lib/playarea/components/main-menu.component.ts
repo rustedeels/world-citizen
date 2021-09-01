@@ -60,6 +60,11 @@ export class MainMenuComponent {
   ) {
     this.title = getBatatas('title');
     this.developer = getBatatas('developer');
+
+    setTimeout(() => {
+      if (this.isPauseMenu) return;
+      this.onNewGame();
+    }, 300);
   }
 
   public onExit() {

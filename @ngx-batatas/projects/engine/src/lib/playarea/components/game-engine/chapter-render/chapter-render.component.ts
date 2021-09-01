@@ -3,30 +3,26 @@ import {
   OnInit,
 } from '@angular/core';
 
-import { ChapterRenderService } from '../../../../render/chapter-render.service';
-import { ChapterRender } from '../../../../render/render.model';
-import { RenderQuery } from '../../../../render/render.query';
+import { RenderQuery } from '../../../../render/_index';
 
 @Component({
   selector: 'bt-chapter-render',
   template: `
-<div class="bt-chapter-render full-screen">
-  {{ render?.dialogText }}
+<div class="bt-chapter-render layer__container">
+  <bt-chapter-media-render class="layer--level-0" ></bt-chapter-media-render>
+  <bt-chapter-dialog-render *ngIf="showDialog" class="layer--level-1" ></bt-chapter-dialog-render>
 </div>
 `
 })
 export class ChapterRenderComponent implements OnInit {
-  public render?: ChapterRender;
+  public showDialog = true;
 
   public constructor(
-    private readonly _chapterRender: ChapterRenderService,
-    private readonly _render: RenderQuery,
+    private readonly _renderQuery: RenderQuery
   ) {}
 
   public ngOnInit(): void {
-    this._render.selectChapter().subscribe(c => {
-      this.render = c;
-    });
-
+    this._renderQuery.select(e => e.chapter.dialogEnd)
+      .subscribe(end => this.showDialog = !end);
   }
 }

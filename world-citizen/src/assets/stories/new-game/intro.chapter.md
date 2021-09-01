@@ -34,7 +34,6 @@ $ showPlayerEditor[intro]
 * .....
 
 # takeOff|pilot
-& `#backColor('#000000')`
 & soundAirplane[LOOP]
 
 ## player|0

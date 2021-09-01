@@ -92,7 +92,6 @@ export class ChapterRenderService implements ServiceInit, ServiceReset {
   public goNext(): boolean {
     const diagIndex = this._renderQuery.getValue().chapter.dialogIndex;
     const textIndex = this._renderQuery.getValue().chapter.textIndex;
-    console.warn(diagIndex, textIndex);
 
     if (diagIndex < 0 || textIndex < 0) {
       this._renderStore.updateChapter({ dialogIndex: 0, textIndex: 0 });
@@ -104,30 +103,13 @@ export class ChapterRenderService implements ServiceInit, ServiceReset {
       return true;
     }
 
-    if (diagIndex < this._dialogs.length -1) {
+    if (diagIndex < this._dialogs.length - 1) {
       this._subs.clear('dialogText');
-      this._renderStore.updateChapter({ dialogIndex: diagIndex + 1 });
+      this._renderStore.updateChapter({ dialogIndex: diagIndex + 1, textIndex: 0 });
       return true;
     }
 
-    return false;
-  }
-
-  public goPrev(): boolean {
-    const diagIndex = this._renderQuery.getValue().chapter.dialogIndex;
-    const textIndex = this._renderQuery.getValue().chapter.textIndex;
-
-    if (textIndex > 0) {
-      this._renderStore.updateChapter({ textIndex: textIndex - 1 });
-      return true;
-    }
-
-    if (diagIndex > 0) {
-      this._subs.clear('dialogText');
-      this._renderStore.updateChapter({ dialogIndex: diagIndex - 1 });
-      return true;
-    }
-
+    this._renderStore.updateChapter({ dialogEnd: true });
     return false;
   }
 
@@ -146,6 +128,10 @@ export class ChapterRenderService implements ServiceInit, ServiceReset {
 
     this._logger.engine('Loading chapter to render', c.id);
     this._renderStore.goToChapter(this.buildInitialChapterRender(c));
+
+    setTimeout(() => {
+      this._renderStore.updateChapter({ timeout: true });
+    }, c.timeout);
 
     this._chars = await this.loadChapterParty(c);
     this._logger.engine('Loaded characters', this._chars);
@@ -177,7 +163,13 @@ export class ChapterRenderService implements ServiceInit, ServiceReset {
 
   private async loadDialog(index: number): Promise<void> {
     const d = this._dialogs[index];
-    if (!d) return;
+    if (!d) {
+      this._subs.clear('dialogText');
+      this._renderStore.updateChapter({ dialogText: '' });
+      this.loadMedia('text', []);
+      this.loadMedia('dialog', []);
+      return;
+    }
 
     const charId = this._chars[d.party];
 
@@ -187,6 +179,7 @@ export class ChapterRenderService implements ServiceInit, ServiceReset {
     await this.loadMedia('dialog', d.media);
 
     this._texts = await this._boolEval.filterValues(d.text);
+    this._logger.engine('Loaded texts', this._texts);
     this.subscribeDialogText();
   }
   // ------------------ dialog ------------------------------

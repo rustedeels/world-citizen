@@ -4,7 +4,7 @@ import {
   ServiceInit,
   ServiceReset,
 } from '../shared/service.model';
-import { InitService } from '../system';
+import { InitService } from '../system/init.service';
 import { ResetService } from '../system/reset.service';
 import { ChapterRenderService } from './chapter-render.service';
 

@@ -27,6 +27,9 @@ export interface ChapterRender {
   charName: string;
 
   nextChapter: NextChapter[];
+
+  dialogEnd: boolean;
+  timeout: boolean;
 }
 
 export const RenderStoreName = '$render-state';
@@ -52,6 +55,8 @@ export function createInitialState(): RenderState {
         dialog: [],
         text: [],
       },
+      dialogEnd: false,
+      timeout: false,
     }
   }
 }
