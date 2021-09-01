@@ -10,6 +10,7 @@ import {
 } from '@ngx-batatas/engine';
 
 import { AppComponent } from './app.component';
+import { EvaluatorsModule } from './evaluators/evaluators.module';
 import { NewGameHandler } from './new-game.handler';
 import { ResModule } from './resources/res.module';
 import { StoryModule } from './stories/story.module';
@@ -22,6 +23,7 @@ import { StoryModule } from './stories/story.module';
     BrowserModule,
     EventsModule.forHandlers([NewGameHandler]),
     LoggerModule.forLevel(LogLevel.all, true),
+    EvaluatorsModule,
     ResModule,
     EngineModule.forRoot({
       appName: 'world-citizen',

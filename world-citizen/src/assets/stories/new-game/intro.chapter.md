@@ -15,14 +15,14 @@
 
 # inputPlayerInfo
 & backAirplaneExt
-$ showPlayerEditor[intro]
+$ showPlayerEditor['intro']
 > View documents [inputPlayerInfo]
 > I'm ready to leave[preTakeOff](#playerInfoCompleted())
 
 # preTakeOff|pilot
 & backAirplaneCabine
 & soundAirplane[LOOP]
-> #AUTO[takeoff]
+> #AUTO[takeOff]
 ## pilot|1
 * Great, it's all ready
 * LISBON!
@@ -63,11 +63,11 @@ $ showPlayerEditor[intro]
 * Ahahahah
 
 ## player2|0
-* You\'re a bit manic, aren\'t you?
+* You're a bit manic, aren't you?
 * ...
 * "I guess it would take a manic to help an idealist like me."
 * ...
-* I\'m exhausted, gonna close my eyes for a bit
+* I'm exhausted, gonna close my eyes for a bit
 * wake me when we are close
 
 # test
