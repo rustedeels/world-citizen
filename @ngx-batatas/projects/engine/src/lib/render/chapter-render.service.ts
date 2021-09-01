@@ -8,6 +8,7 @@ import {
   DialogText,
   Media,
   MediaStatic,
+  NextChapter,
   PartyMember,
   PartyMemberStatic,
 } from '../chapter/chapter.model';
@@ -47,6 +48,7 @@ export class ChapterRenderService implements ServiceInit, ServiceReset {
   private _dialogs: Dialog[] = [];
   private _texts: DialogText[] = [];
   private _chars: string[] = [];
+  private _next: NextChapter[] = [];
 
   private __init = false;
 
@@ -93,6 +95,11 @@ export class ChapterRenderService implements ServiceInit, ServiceReset {
     const diagIndex = this._renderQuery.getValue().chapter.dialogIndex;
     const textIndex = this._renderQuery.getValue().chapter.textIndex;
 
+    if (!this._dialogs.length) {
+      this._renderStore.updateChapter({ dialogEnd: true });
+      return true;
+    }
+
     if (diagIndex < 0 || textIndex < 0) {
       this._renderStore.updateChapter({ dialogIndex: 0, textIndex: 0 });
       return true;
@@ -123,11 +130,17 @@ export class ChapterRenderService implements ServiceInit, ServiceReset {
       this._dialogs = [];
       this._texts = [];
       this._chars = [];
+      this._next = [];
       return;
     };
 
     this._logger.engine('Loading chapter to render', c.id);
     this._renderStore.goToChapter(this.buildInitialChapterRender(c));
+
+    await this.triggerActions(c);
+
+    this._next = [...c.next];
+    await this.updateNextList();
 
     setTimeout(() => {
       this._renderStore.updateChapter({ timeout: true });
@@ -181,6 +194,8 @@ export class ChapterRenderService implements ServiceInit, ServiceReset {
     this._texts = await this._boolEval.filterValues(d.text);
     this._logger.engine('Loaded texts', this._texts);
     this.subscribeDialogText();
+
+    await this.updateNextList();
   }
   // ------------------ dialog ------------------------------
 
@@ -193,10 +208,12 @@ export class ChapterRenderService implements ServiceInit, ServiceReset {
     );
   }
 
-  private setText(index: number): void {
+  private async setText(index: number) {
     const d = this._texts[index];
     this._renderStore.updateChapter({ dialogText: d?.text ?? '' });
     if (d) { this.loadMedia('text', d.media); }
+
+    await this.updateNextList();
   }
   // ------------------ text --------------------------------
 
@@ -301,4 +318,27 @@ export class ChapterRenderService implements ServiceInit, ServiceReset {
     return !!(m as MediaStatic).id;
   }
   // ------------------- Media ------------------------------
+
+  // ------------------- Next -------------------------------
+  private async updateNextList() {
+    const list = await this._boolEval.filterValues(this._next);
+    this._renderStore.updateChapter({ nextChapter: list });
+  }
+  // ------------------- Next -------------------------------
+
+  // ----------------- Actions ------------------------------
+  private async triggerActions(chapter: Chapter) {
+    const actions = await this._boolEval.filterValues(chapter.actions);
+
+    for (const a of actions) {
+      try {
+        if (!a.event) continue;
+        const props = !a.params ? undefined : await this._evalService.evaluateAsync(a.params);
+        this._events.emit(a.event as any, props);
+      } catch (err) {
+        this._logger.error('Error processing action', err);
+      }
+    }
+  }
+  // ----------------- Actions ------------------------------
 }

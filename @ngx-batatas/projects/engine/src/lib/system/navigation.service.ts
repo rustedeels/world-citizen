@@ -23,7 +23,7 @@ export class NavigationService implements ServiceReset {
     this._gameEngineState.nextState('waiting');
   }
 
-  public goToChapter(id: string, prefix: string | undefined): boolean {
+  public goToChapter(id: string, prefix?: string | undefined): boolean {
     if (prefix) id = `${prefix}=>${id}`;
     const chapter = this._chapterQuery.getEntity(id);
     if (!chapter) {

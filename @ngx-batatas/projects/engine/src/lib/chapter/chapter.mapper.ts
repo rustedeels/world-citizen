@@ -139,7 +139,7 @@ function mapNext(raw: RawProperty[], pre: string): NextChapter[] {
   return raw.map(e => ({
     text: e.name,
     bool: e.bool,
-    id: isPrefix(e.name) ? e.name : prefix(e.name, pre),
+    id: isPrefix(e.props) ? e.props : prefix(e.props, pre),
   }));
 }
 

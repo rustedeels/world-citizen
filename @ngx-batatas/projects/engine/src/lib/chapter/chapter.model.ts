@@ -116,3 +116,5 @@ export interface ChaptersGenerator {
 
 export interface ChapterState extends EntityState<Chapter, string>, ActiveState {}
 export const ChapterStoreName = '$chapters';
+
+export const AUTO_NEXT_CHAPTER = '#AUTO';

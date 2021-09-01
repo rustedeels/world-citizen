@@ -21,7 +21,6 @@ export class EvaluatorStoreService {
 
   public get<T>(name: string): StateEval<T> | undefined {
     if (this._evals.has(name)) return this._evals.get(name);
-    this._logger.warning('Not evaluator for name: ', name);
     return;
   }
 }

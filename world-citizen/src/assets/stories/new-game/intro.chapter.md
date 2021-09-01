@@ -22,7 +22,7 @@ $ showPlayerEditor[intro]
 # preTakeOff|pilot
 & backAirplaneCabine
 & soundAirplane[LOOP]
-> AUTO[takeoff]
+> #AUTO[takeoff]
 ## pilot|1
 * Great, it's all ready
 * LISBON!
@@ -35,6 +35,7 @@ $ showPlayerEditor[intro]
 
 # takeOff|pilot
 & soundAirplane[LOOP]
+> #AUTO[onAir1]
 
 ## player|0
 * I can't look
@@ -68,3 +69,8 @@ $ showPlayerEditor[intro]
 * ...
 * I\'m exhausted, gonna close my eyes for a bit
 * wake me when we are close
+
+# test
+& backOnAirCabin
+> option 1[Intro]
+> option 2[Intro]()
