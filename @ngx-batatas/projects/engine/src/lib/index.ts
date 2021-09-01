@@ -4,6 +4,7 @@ export * from './body-part/index';
 export * from './chapter/index';
 export * from './char/index';
 export * from './core/index';
+export * from './custom-view/_index';
 export * from './data-loader/loader.service';
 export * from './date-time/index';
 export * from './evaluator/index';

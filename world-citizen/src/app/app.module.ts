@@ -7,9 +7,14 @@ import {
   EventsModule,
   LoggerModule,
   LogLevel,
+  WidgetsModule,
 } from '@ngx-batatas/engine';
 
 import { AppComponent } from './app.component';
+import {
+  COMPONENTS,
+  ComponentService,
+} from './components/_index';
 import { EvaluatorsModule } from './evaluators/evaluators.module';
 import { NewGameHandler } from './new-game.handler';
 import { ResModule } from './resources/res.module';
@@ -17,10 +22,12 @@ import { StoryModule } from './stories/story.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    COMPONENTS,
   ],
   imports: [
     BrowserModule,
+    WidgetsModule,
     EventsModule.forHandlers([NewGameHandler]),
     LoggerModule.forLevel(LogLevel.all, true),
     EvaluatorsModule,
@@ -33,7 +40,11 @@ import { StoryModule } from './stories/story.module';
     }),
     StoryModule,
   ],
-  providers: [],
+  providers: [ComponentService],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule {
+  public constructor(
+    _: ComponentService,
+  ) {}
+}

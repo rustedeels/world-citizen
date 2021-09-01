@@ -1,4 +1,5 @@
 import { CharInit } from '../char/char.model';
+import { ShowCustomView } from '../custom-view/custom-view.model';
 
 export type BatatasEvents = Extract<keyof BatatasEventsMap, string>;
 
@@ -18,4 +19,7 @@ export interface BatatasEventsMap {
 
   /** If in chapter state, go to next state */
   chapterGoNext: never;
+
+  /** Show a custom view */
+  goToCustomView: ShowCustomView<any>
 }

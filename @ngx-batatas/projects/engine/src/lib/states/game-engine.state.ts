@@ -5,6 +5,7 @@ import { StateMachine } from './state-machine';
 export interface GameEngineState {
   waiting: never;
   chapter: never;
+  customView: never;
 }
 
 @Injectable({ providedIn: 'platform' })

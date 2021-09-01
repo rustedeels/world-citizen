@@ -1,0 +1,19 @@
+.bt-custom-view {
+  & > .layer--overlay {
+    & > .return {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      width: 1.5rem;
+      height: 1.5rem;
+      cursor: pointer;
+      font-size: 1.5rem;
+
+      color: $color-accent;
+
+      &:hover {
+        color: $color-active;
+      }
+    }
+  }
+}

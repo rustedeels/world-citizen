@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { ChapterQuery } from '../chapter';
 import { ChapterStore } from '../chapter/chapter.store';
+import { CustomViewStore } from '../custom-view/custom-view.store';
 import { LoggerService } from '../logger';
 import { ServiceReset } from '../shared/service.model';
 import { GameEngineStateMachine } from '../states/game-engine.state';
@@ -15,6 +16,7 @@ export class NavigationService implements ServiceReset {
     private readonly _chapterQuery: ChapterQuery,
     private readonly _gameEngineState: GameEngineStateMachine,
     private readonly _logger: LoggerService,
+    private readonly _customView: CustomViewStore,
     reset: ResetService,
   ) { reset.register(this); }
 
@@ -35,5 +37,11 @@ export class NavigationService implements ServiceReset {
     this._gameEngineState.nextState('chapter');
 
     return true;
+  }
+
+  public goToCustomView<T>(name: string, params?: T): boolean {
+    const res = this._customView.setActive(name, params);
+    this._gameEngineState.nextState('customView');
+    return res;
   }
 }

@@ -15,6 +15,7 @@ import {
 <div class="bt-game-engine full-screen">
   <ng-container [ngSwitch]="state">
     <bt-chapter-render *ngSwitchCase="'chapter'" ></bt-chapter-render>
+    <bt-custom-view *ngSwitchCase="'customView'"></bt-custom-view>
     <div *ngSwitchDefault></div>
   </ng-container>
 </div>

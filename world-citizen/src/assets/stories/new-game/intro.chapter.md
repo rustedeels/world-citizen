@@ -15,9 +15,12 @@
 
 # inputPlayerInfo
 & backAirplaneExt
-$ showPlayerEditor['intro']
-> View documents [inputPlayerInfo]
+$ goToCustomView[{ name: 'playerConfig', params: 'basic' }]
+> View documents [inputPlayerInfoReload]
 > I'm ready to leave[preTakeOff](#playerInfoCompleted())
+
+# inputPlayerInfoReload
+> #AUTO[inputPlayerInfo]
 
 # preTakeOff|pilot
 & backAirplaneCabine

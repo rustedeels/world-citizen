@@ -1,5 +1,11 @@
-import { forkJoin, Observable } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import {
+  forkJoin,
+  Observable,
+} from 'rxjs';
+import {
+  catchError,
+  map,
+} from 'rxjs/operators';
 
 import { LoggerService } from '../logger';
 import { EvalMap } from './evaluator.model';
@@ -61,6 +67,6 @@ export class EvalHandler {
     for (const token of Object.keys(this.Evals))
       exp = exp.replaceAll('#' + token, `map['${token}'].apply`);
 
-    return `(map) => ${exp}`;
+    return `(map) => { return ${exp} }`;
   }
 }
