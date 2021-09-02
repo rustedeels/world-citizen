@@ -27,6 +27,11 @@
   &--overlay {
     @extend .layer;
     z-index: 500;
+    pointer-events: none;
+
+    & > * {
+      pointer-events: auto;
+    }
   }
 
   &--top-most {

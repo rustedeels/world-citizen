@@ -44,6 +44,9 @@ export type BodyPartId =
 | 'feet'
 ;
 
-export type BodyPartSlotMap<T extends BodyPartId> = {
-  [key in T]: BodySlot;
+export type BodyPartIdMap<T extends BodyPartId, V> = {
+  [key in T]: V;
 }
+
+export type BodyPartSlotMap<T extends BodyPartId> = BodyPartIdMap<T, BodySlot>;
+export type BodyPartPathMap<T extends BodyPartId> = BodyPartIdMap<T, [string, number] | undefined>;

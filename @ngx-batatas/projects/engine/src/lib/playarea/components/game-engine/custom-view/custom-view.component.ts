@@ -19,7 +19,9 @@ import { GameEngineStateMachine } from '../../../../states';
   selector: 'bt-custom-view',
   template: `
 <div class="bt-custom-view layer__container">
-  <div #host class="layer--level-1" ></div>
+  <div class="layer--level-1" >
+    <ng-container #host ></ng-container>
+  </div>
   <div class="layer--overlay">
     <div
       class="return"
@@ -54,7 +56,9 @@ export class CustomViewComponent implements AfterViewInit {
           this._currentView = undefined;
           return;
         }
-        this.loadView(view[0], view[1]);
+        setTimeout(() => {
+          this.loadView(view[0], view[1]);
+        }, 0);
       })
   }
 
@@ -64,6 +68,7 @@ export class CustomViewComponent implements AfterViewInit {
 
   private async loadView(view: Type<CustomView<any>>, params?: any) {
     if (view === this._currentView) return;
+    this._currentView = view;
     const factory = this._factoryResolver.resolveComponentFactory(view);
     const ref = this.host.createComponent(factory);
     this._logger.engine('Loaded custom view', ref.instance.name, params);

@@ -1,0 +1,10 @@
+.wc-player-config {
+  display: grid;
+  grid-template-columns: 18.75rem auto;
+  grid-template-areas:
+    "avatar others";
+
+  & > .avatar {
+    grid-area: avatar;
+  }
+}

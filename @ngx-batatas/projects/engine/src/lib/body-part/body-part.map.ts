@@ -1,4 +1,8 @@
-import { BodyPartId, BodyPartSlotMap } from './body-part.model';
+import {
+  BodyPartId,
+  BodyPartPathMap,
+  BodyPartSlotMap,
+} from './body-part.model';
 
 export const BodyPartsMap: BodyPartSlotMap<BodyPartId> = {
   bodyMale: 'body',
@@ -24,4 +28,30 @@ export const BodyPartsMap: BodyPartSlotMap<BodyPartId> = {
   nose: 'nose',
   hands: 'hands',
   feet: 'feet',
+}
+
+export const BodyPartsImageMap: BodyPartPathMap<BodyPartId> = {
+  bodyMale: ['body.png', 1],
+  bodyFemale: ['body.png', 1],
+  flatChest: ['boobs.flat.png', 2],
+  smallTits: ['boobs.small.png', 2],
+  tits: ['boobs.medium.png', 2],
+  bigTits: ['boobs.big.png', 2],
+  smallDick: ['penis.small.png', 2],
+  dick: ['penis.medium.png', 2],
+  bigDick: ['penis.big.png', 2],
+  tightPussy: ['pussy.png', 2],
+  pussy: ['pussy.png', 2],
+  loosePussy: ['pussy.open.png', 2],
+  tightAnus: undefined,
+  anus: undefined,
+  looseAnus: undefined,
+  shortHair: ['hair.short.png', 2],
+  longHair: ['hair.long.png', 2],
+  eyes: ['face.png', 2],
+  ears: undefined,
+  mouth: undefined,
+  nose: undefined,
+  hands: undefined,
+  feet: undefined,
 }

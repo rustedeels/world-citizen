@@ -7,9 +7,9 @@ import {
 @Component({
   template: `
 <div class="wc-player-config full-screen">
-  batatas
+  <bt-avatar class="avatar" ></bt-avatar>
 </div>
-`
+`,
 })
 export class PlayerConfigComponent implements CustomView<string> {
   public name = 'playerConfig';

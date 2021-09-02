@@ -1,0 +1,35 @@
+.bt-input {
+  display: flex;
+  flex-direction: column;
+
+  .input {
+    border: none;
+    border-bottom: 1px solid $color-accent;
+    border-radius: 0;
+    background-color: $color-primary;
+    color: $color-text;
+    font-family: 'audiowide';
+    font-size: 1rem;
+    outline: none;
+
+    &:focus {
+      outline: none;
+      border: none;
+      border-bottom: 1px solid $color-active;
+    }
+
+    &.readonly {
+      outline: none;
+      opacity: 0.9;
+    }
+
+    &.disabled {
+      border-bottom: 1px solid $color-accent;
+    }
+
+    &::placeholder {
+      color: $color-text;
+      opacity: 0.5;
+    }
+  }
+}
