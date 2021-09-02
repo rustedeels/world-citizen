@@ -25,7 +25,6 @@ $ goToCustomView[{ name: 'playerConfig', params: 'basic' }]
 # preTakeOff|pilot
 & backAirplaneCabine
 & soundAirplane[LOOP]
-> #AUTO[takeOff]
 ## pilot|1
 * Great, it's all ready
 * LISBON!
@@ -35,24 +34,6 @@ $ goToCustomView[{ name: 'playerConfig', params: 'basic' }]
 * Phrasing!
 * ...
 * .....
-
-# takeOff|pilot
-& soundAirplane[LOOP]
-> #AUTO[onAir1]
-
-## player|0
-* I can't look
-* This old pieace of shit is going to kill us!
-& soundAirplaneTakeoff
-
-## pilot|1
-* Don't insult her!
-* She could fly throught any storm
-* Open your eyes, a little faith can go a long way
-
-# onAir1|pilot
-& backOnAirCabin
-& soundAirplane[LOOP]
 
 ## player1|0
 * I still don't like it...
@@ -73,4 +54,4 @@ $ goToCustomView[{ name: 'playerConfig', params: 'basic' }]
 * I'm exhausted, gonna close my eyes for a bit
 * wake me when we are close
 
-
+# closeEyes

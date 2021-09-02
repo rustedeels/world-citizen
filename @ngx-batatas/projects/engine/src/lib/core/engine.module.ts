@@ -5,6 +5,7 @@ import {
 } from '@angular/core';
 
 import { AttributesModule } from '../attr/attr.module';
+import { AudioModule } from '../audio/audio.module';
 import { BodyModule } from '../body/body.module';
 import { ChapterModule } from '../chapter/chapter.module';
 import { CharModule } from '../char/char.module';
@@ -35,6 +36,7 @@ import { EngineStore } from './engine.store';
     ChapterModule.forRoot(),
     EventsModule.forRoot(INTERNAL_HANDLERS),
     PlayAreaModule,
+    AudioModule,
   ],
   exports: [PlayAreaModule]
 })

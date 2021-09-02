@@ -3,8 +3,8 @@ import {
   PLAYER_ID,
 } from '@ngx-batatas/engine';
 
-import { ResourceNames as CoreResources } from '../resources/resources.mapper';
-import { ResourceNames as NewGameResources } from '../stories/new-game/resources.name';
+import { ResourceNames as CoreResources } from '../resources/resources.names';
+import { ResourceNames as NewGameResources } from '../stories/new-game/resources.names';
 import { CharacterNames } from './character.name';
 
 export const CHARACTERS: CharInit[] = [

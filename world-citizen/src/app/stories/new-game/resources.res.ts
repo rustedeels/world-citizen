@@ -1,6 +1,5 @@
 import { Resource } from '@ngx-batatas/engine';
-
-import { ResourceNames } from './resources.name';
+import { ResourceNames } from './resources.names';
 
 export const STORY_RESOURCES: Resource[] = [
   {

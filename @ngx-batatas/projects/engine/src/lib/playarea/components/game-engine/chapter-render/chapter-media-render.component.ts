@@ -4,6 +4,10 @@ import {
 } from '@angular/core';
 
 import {
+  AudioService,
+  AudioTrack,
+} from '../../../../audio/_index';
+import {
   MediaMap,
   MediaResource,
   RenderQuery,
@@ -28,6 +32,7 @@ export class ChapterMediaRenderComponent implements OnInit {
 
   public constructor(
     private readonly _render: RenderQuery,
+    private readonly _audio: AudioService,
   ) {}
 
   public ngOnInit() {
@@ -36,13 +41,33 @@ export class ChapterMediaRenderComponent implements OnInit {
   }
 
   private update(map: MediaMap) {
+    if (
+      !map.chapter.length
+      && !map.dialog.length
+      && !map.text.length
+    ) return;
     this.updateBack(map);
+    this.updateSounds(map);
   }
 
   private updateBack(map: MediaMap) {
     const path = getFirstMedia('background', map)?.path;
     if (path !== this.backgroundPath)
       this.backgroundPath = path;
+  }
+
+  private updateSounds(map: MediaMap) {
+    const files = getMedia('sound', map);
+    files.push(...getMedia('music', map));
+    const tracks: AudioTrack[] = [];
+
+    for (const m of files) {
+      tracks.push(this._audio.play(m.path, m.type, m.attr));
+    }
+
+    const toStop: AudioTrack[] = ['music', 'ambient', 'effect', 'system']
+      .filter(a => !tracks.find(e => e === a)) as AudioTrack[];
+    this._audio.stop(...toStop);
   }
 }
 

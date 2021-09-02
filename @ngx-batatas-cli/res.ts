@@ -31,7 +31,7 @@ if (!await exists(dest)) {
   Deno.exit(3);
 }
 
-const mapperFileName = `${destFileName}.mapper`;
+const mapperFileName = `${destFileName}.names`;
 const mapperFile = join(dest, `${mapperFileName}.ts`);
 const resFile = join(dest, `${destFileName}.res.ts`);
 
