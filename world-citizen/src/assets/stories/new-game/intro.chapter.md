@@ -25,6 +25,7 @@ $ goToCustomView[{ name: 'playerConfig', params: 'basic' }]
 # preTakeOff|pilot
 & backAirplaneCabine
 & soundAirplane[LOOP]
+> #AUTO[closeEyes]
 ## pilot|1
 * Great, it's all ready
 * LISBON!
@@ -55,3 +56,12 @@ $ goToCustomView[{ name: 'playerConfig', params: 'basic' }]
 * wake me when we are close
 
 # closeEyes
+& backAirplaneCabine
+& soundAirplane[LOOP]
+$ fadeToBlack[{ id: 'b476b59c-5200-43ce-864f-49f234a24540=>intro', time: 5000 }]
+## main
+* "What the fuck am I doing..."
+* ..
+* zzZ
+* ZZZZZZ
+* ZZZZZZZZ

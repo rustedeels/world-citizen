@@ -4,7 +4,6 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {
   EngineModule,
-  EventsModule,
   LoggerModule,
   LogLevel,
   WidgetsModule,
@@ -16,7 +15,7 @@ import {
   ComponentService,
 } from './components/_index';
 import { EvaluatorsModule } from './evaluators/evaluators.module';
-import { NewGameHandler } from './new-game.handler';
+import { EventHandlersModule } from './event-handlers/event-handlers.module';
 import { ResModule } from './resources/res.module';
 import { StoryModule } from './stories/story.module';
 
@@ -28,7 +27,7 @@ import { StoryModule } from './stories/story.module';
   imports: [
     BrowserModule,
     WidgetsModule,
-    EventsModule.forHandlers([NewGameHandler]),
+    EventHandlersModule,
     LoggerModule.forLevel(LogLevel.all, true),
     EvaluatorsModule,
     ResModule,

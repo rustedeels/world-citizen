@@ -5,4 +5,7 @@ export const RESOURCES = {
   backAirplaneCabine: ResourceNames.backCabin,
   soundAirplane: ResourceNames.soundAirplane,
   backOnAirCabin: ResourceNames.backCabinFly,
+  backLivingRoom: ResourceNames.backLivingRoom,
+  soundSex: ResourceNames.soundSexWoman1,
+  videoAngelaDogUnknown: ResourceNames.videoAngelaWhiteDog1,
 }

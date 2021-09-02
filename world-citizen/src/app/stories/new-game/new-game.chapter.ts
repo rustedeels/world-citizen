@@ -5,7 +5,10 @@ import { RESOURCES } from './resources.map';
 
 export const NEW_GAME_GENERATOR: ChaptersGenerator = {
   id: '00752e8c-2cc7-4c96-958a-e9279e1c977f',
-  chapters: ['/assets/stories/new-game/intro.chapter.md'],
+  chapters: [
+    '/assets/stories/new-game/intro.chapter.md',
+    '/assets/stories/new-game/dream.chapter.md',
+  ],
   charMap: CHARACTERS,
   resMap: RESOURCES
 }

@@ -1,0 +1,23 @@
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.7;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+.effect {
+  &.fade-to-black {
+    .wc-root {
+      animation: fadeOut 3s linear;
+      opacity: 0;
+    }
+    background-color: black;
+  }
+}

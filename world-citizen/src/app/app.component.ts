@@ -10,7 +10,9 @@ import { CharInitService } from './characters/char-init.service';
 @Component({
   selector: 'wc-root',
   template: `
-<batatas-play-area></batatas-play-area>
+<div class="wc-root full-screen">
+  <batatas-play-area></batatas-play-area>
+</div>
   `,
   styles: []
 })
