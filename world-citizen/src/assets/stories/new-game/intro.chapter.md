@@ -14,7 +14,7 @@
 * that pussy ass journalist ratted my address to the feds!
 
 # inputPlayerInfo
-& backAirplaneExt
+& backAirplaneCabine
 $ goToCustomView[{ name: 'playerConfig', params: 'basic' }]
 > View documents [inputPlayerInfoReload]
 > I'm ready to leave[preTakeOff](#playerInfoCompleted())
@@ -73,7 +73,4 @@ $ goToCustomView[{ name: 'playerConfig', params: 'basic' }]
 * I'm exhausted, gonna close my eyes for a bit
 * wake me when we are close
 
-# test
-& backOnAirCabin
-> option 1[Intro]
-> option 2[Intro]()
+

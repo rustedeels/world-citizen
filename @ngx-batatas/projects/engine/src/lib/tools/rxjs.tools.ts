@@ -46,7 +46,7 @@ export class SubscriberManager<T extends string> {
 
     if (!state) {
       state = { key: false };
-      this._state[name];
+      this._state[name] = state;
     }
 
     return state;

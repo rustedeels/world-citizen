@@ -1,4 +1,7 @@
-import { tap } from 'rxjs/operators';
+import {
+  distinctUntilChanged,
+  tap,
+} from 'rxjs/operators';
 
 import { Injectable } from '@angular/core';
 
@@ -70,9 +73,13 @@ export class ChapterRenderService implements ServiceInit, ServiceReset {
     this.__init = true;
 
     this._chapterQuery.selectActive()
+      .pipe(
+        distinctUntilChanged((a, b) => {
+          return a === b || a?.id === b?.id;
+        }),
+      )
       .subscribe(chapter => {
         if (!chapter) return;
-
         this.renderChapter(chapter);
       });
 
@@ -120,12 +127,12 @@ export class ChapterRenderService implements ServiceInit, ServiceReset {
     return false;
   }
 
-  public async renderChapter(chapter?: Chapter): Promise<void> {
+  private async renderChapter(chapter?: Chapter): Promise<void> {
     this._subs.clear();
     this.loadChapter(chapter);
   }
 
-  public async loadChapter(c?: Chapter) {
+  private async loadChapter(c?: Chapter) {
     if (!c) {
       this._dialogs = [];
       this._texts = [];
@@ -170,14 +177,17 @@ export class ChapterRenderService implements ServiceInit, ServiceReset {
     this._subs.subscribe(
       'dialog',
       this._renderQuery.select(s => s.chapter.dialogIndex)
-        .pipe(tap(d => this.loadDialog(d))),
+        .pipe(
+          distinctUntilChanged(),
+          tap(d => this.loadDialog(d))
+        ),
     );
   }
 
   private async loadDialog(index: number): Promise<void> {
     const d = this._dialogs[index];
+    this._subs.clear('dialogText');
     if (!d) {
-      this._subs.clear('dialogText');
       this._renderStore.updateChapter({ dialogText: '' });
       this.loadMedia('text', []);
       this.loadMedia('dialog', []);
@@ -204,7 +214,10 @@ export class ChapterRenderService implements ServiceInit, ServiceReset {
     this._subs.subscribe(
       'dialogText',
       this._renderQuery.select(s => s.chapter.textIndex)
-        .pipe(tap(d => this.setText(d)))
+        .pipe(
+          distinctUntilChanged(),
+          tap(d => this.setText(d))
+        )
     );
   }
 

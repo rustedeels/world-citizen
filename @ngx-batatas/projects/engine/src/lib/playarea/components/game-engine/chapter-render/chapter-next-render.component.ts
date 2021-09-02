@@ -7,6 +7,7 @@ import {
   AUTO_NEXT_CHAPTER,
   NextChapter,
 } from '../../../../chapter/chapter.model';
+import { LoggerService } from '../../../../logger';
 import { RenderQuery } from '../../../../render/_index';
 import { NavigationService } from '../../../../system/navigation.service';
 
@@ -34,11 +35,12 @@ export class ChapterNextRenderComponent implements OnInit{
   public constructor(
     private readonly _render: RenderQuery,
     private readonly _nav: NavigationService,
+    private readonly _logger: LoggerService,
   ) {}
 
   public ngOnInit() {
-    this._render.select(e => e.chapter.nextChapter)
-      .subscribe(list => this.updateNext(list));
+    this._render.select(e => e.chapter)
+      .subscribe(c => this.updateNext(c.nextChapter, c.dialogEnd, c.timeout));
   }
 
   public goToChapter(id: string) {
@@ -46,7 +48,9 @@ export class ChapterNextRenderComponent implements OnInit{
     this._nav.goToChapter(id);
   }
 
-  private updateNext(list: NextChapter[]) {
+  private updateNext(list: NextChapter[], dialogEnd: boolean, timeout: boolean) {
+    if (!dialogEnd || !timeout) return;
+
     this.nextRender = [];
 
     if (this.hasAuto(list)) return;
@@ -55,9 +59,9 @@ export class ChapterNextRenderComponent implements OnInit{
   }
 
   private hasAuto(list: NextChapter[]): boolean {
-    if (list.length !== 1) return false;
-    const n = list[0];
-    if (!n || n.text !== AUTO_NEXT_CHAPTER) return false;
+    const n = list.find(e => e.text === AUTO_NEXT_CHAPTER);
+    if (!n) return false;
+    this._logger.engine('Auto progress to', n.id);
     this._nav.goToChapter(n.id);
     return true;
   }
