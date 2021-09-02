@@ -16,6 +16,6 @@ export class NewGameHandler {
   @EventHandler('newGameInit')
   public async onNewGame() {
     await this._charInit.initChars().toPromise();
-    this._navService.goToChapter('inputPlayerInfo', '00752e8c-2cc7-4c96-958a-e9279e1c977f');
+    this._navService.goToChapter('Intro', '00752e8c-2cc7-4c96-958a-e9279e1c977f');
   }
 }
