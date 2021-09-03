@@ -1,39 +1,60 @@
-import { Howl } from 'howler';
+import { MediaResource } from '../render/render.model';
 
-import { ResourceType } from '../resources';
+export type AudioTrackType = 'music' | 'effect' | 'ambient' | 'system';
 
-export type AudioTrack = 'music' | 'effect' | 'ambient' | 'system';
-
-export interface AudioFile {
-  path: string;
-  track: AudioTrack;
+export interface AudioTrackProp {
+  multiple: boolean;
+  loop: boolean;
+  end: boolean;
 }
 
-export interface AudioInstance {
-  path?: string;
-  id?: number;
-  howl?: Howl;
-  track: AudioTrack;
-  playing: boolean;
+export type AudioTrackPropMap = {
+  [key in AudioTrackType]: AudioTrackProp
 }
 
-export type AutioTrackMap = {
-  [key in AudioTrack]: AudioInstance;
-}
+/** Audio will loop */
+export const AUDIO_PROP_LOOP = 'LOOP';
+/** Audio can't be stopped */
+export const AUDIO_PROP_END = 'END';
 
-export function buildAudioFile(path: string, type?: ResourceType, props?: string[]): AudioFile {
-  let track: AudioTrack = 'system';
-
-  if (type) {
-    switch (type) {
-      case 'music':
-        track = 'music';
-        break;
-      case 'sound':
-        track = props?.find(e => e === 'LOOP') ? 'ambient' : 'effect';
-        break;
-    }
+export const AUDIO_MAP: AudioTrackPropMap = {
+  ambient: {
+    multiple: false,
+    end: false,
+    loop: true,
+  },
+  effect: {
+    multiple: true,
+    end: true,
+    loop: false,
+  },
+  system: {
+    multiple: true,
+    end: false,
+    loop: false,
+  },
+  music: {
+    multiple: false,
+    end: false,
+    loop: true,
   }
+}
 
-  return { path, track };
+export interface AudioItem {
+  path: string;
+  track: AudioTrackType;
+}
+
+export function getTrackType(m: MediaResource): AudioTrackType {
+  if (m.type === 'music') return 'music';
+
+  if (m.attr.includes(AUDIO_PROP_LOOP)) return 'ambient';
+  return m.attr.includes(AUDIO_PROP_END) ? 'effect' : 'system';
+}
+
+export function buildAudioItem(m: MediaResource): AudioItem {
+  return {
+    path: m.path,
+    track: getTrackType(m)
+  }
 }

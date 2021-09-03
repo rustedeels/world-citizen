@@ -1,9 +1,7 @@
-import { Howl } from 'howler';
-
 import { Injectable } from '@angular/core';
 
 import { LoggerService } from '../logger';
-import { ResourceType } from '../resources';
+import { MediaResource } from '../render/render.model';
 import { ServiceInit } from '../shared/service.model';
 import {
   AppSettings,
@@ -11,20 +9,18 @@ import {
   SettingsService,
 } from '../system';
 import { BoolState } from '../tools/bool.tools';
+import { AudioHandler } from './audio-handler';
 import {
-  AudioFile,
-  AudioInstance,
-  AudioTrack,
-  AutioTrackMap,
-  buildAudioFile,
+  AudioTrackType,
+  buildAudioItem,
 } from './audio.model';
 
 @Injectable({ providedIn: 'platform' })
 export class AudioService implements ServiceInit {
   private _musicVolume = 1;
   private _audioVolume = 1;
-  private  readonly _tracks: AutioTrackMap;
   private readonly _init = new BoolState();
+  private readonly _handler: { [key in AudioTrackType]: AudioHandler };
 
   public constructor(
     initService: InitService,
@@ -32,11 +28,11 @@ export class AudioService implements ServiceInit {
     private readonly _logger: LoggerService,
   ) {
     initService.register(this);
-    this._tracks = {
-      music: this.initTrack('music'),
-      ambient: this.initTrack('ambient'),
-      effect: this.initTrack('effect'),
-      system: this.initTrack('system'),
+    this._handler = {
+      ambient: new AudioHandler('ambient'),
+      system: new AudioHandler('system'),
+      effect: new AudioHandler('effect'),
+      music: new AudioHandler('music'),
     }
   }
 
@@ -45,48 +41,20 @@ export class AudioService implements ServiceInit {
     this._settings.settings.subscribe(s => this.calculateVolume(s));
   }
 
-  public play(path: string, type?: ResourceType, props?: string[]): AudioTrack {
-    const audio = buildAudioFile(path, type, props);
-    this.playFile(audio);
-    return audio.track;
+  public play(media: MediaResource): AudioTrackType {
+    const { path, track } = buildAudioItem(media);
+    this._handler[track].play(path);
+    return track;
   }
 
-  public playFile({ path, track }: AudioFile): void {
-    const i = this._tracks[track];
-    if (path === i.path) return;
-    this.stop(track);
-    i.howl = this.initHowl(track, path);
-    i.path = path;
-    i.id = path ? i.howl?.play() : undefined;
-    this._tracks[track] = i;
-    if (i.id) {
-      this._logger.engine(`Playing ${track} track`, path, i.id);
-    }
+  public stop(...tracks: AudioTrackType[]): void {
+    for (const key of tracks)
+      this._handler[key].stop();
   }
 
-  public stop(): void
-  public stop(...trackList: AudioTrack[]): void
-  public stop(...trackList: AudioTrack[]): void {
-    if (!trackList.length) trackList = Object.keys(this._tracks) as AudioTrack[];
-    for (const track of trackList) {
-      const i = this._tracks[track];
-      if (this.isPlaying(track)){
-        i.howl?.stop(i.id);
-        i.playing = false;
-        this._tracks[track] = i;
-        this._logger.engine('Stop audio', i.path);
-      }
-    }
-  }
-
-  public setVolume(track: AudioTrack, volume: number): void {
-    const i = this._tracks[track];
-    if (typeof i.id !== 'undefined')
-      i.howl?.volume(volume, i.id)
-  }
-
-  private isPlaying(track: AudioTrack): boolean {
-    return this._tracks[track].playing;
+  public forceStop() {
+    for (const v of Object.values(this._handler))
+      v.stop(true);
   }
 
   private calculateVolume(s?: AppSettings): void {
@@ -101,30 +69,7 @@ export class AudioService implements ServiceInit {
   }
 
   private updateVolumes(): void {
-    this.setVolume('ambient', this._audioVolume);
-    this.setVolume('effect', this._audioVolume);
-    this.setVolume('system', this._audioVolume);
-    this.setVolume('music', this._musicVolume);
-  }
 
-  private initTrack(track: AudioTrack): AudioInstance {
-    return {
-      howl: this.initHowl(track),
-      track,
-      playing: false,
-    }
-  }
-
-  private initHowl(track: AudioTrack, path?: string): Howl | undefined {
-    if (!path) return;
-    return new Howl({
-      autoplay: false,
-      loop: track === 'ambient' || track === 'music',
-      volume: track === 'music' ? this._musicVolume : this._audioVolume,
-      src: path,
-      onend: () => this._tracks[track].playing = false,
-      onplay: () => this._tracks[track].playing = true,
-    });
   }
 
 }

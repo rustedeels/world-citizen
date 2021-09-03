@@ -5,7 +5,7 @@ import {
 
 import {
   AudioService,
-  AudioTrack,
+  AudioTrackType,
 } from '../../../../audio/_index';
 import {
   MediaMap,
@@ -85,14 +85,14 @@ export class ChapterMediaRenderComponent implements OnInit {
   private updateSounds(map: MediaMap) {
     const files = getMedia('sound', map);
     files.push(...getMedia('music', map));
-    const tracks: AudioTrack[] = [];
+    const tracks: AudioTrackType[] = [];
 
     for (const m of files) {
-      tracks.push(this._audio.play(m.path, m.type, m.attr));
+      tracks.push(this._audio.play(m));
     }
 
-    const toStop: AudioTrack[] = ['music', 'ambient', 'effect', 'system']
-      .filter(a => !tracks.find(e => e === a)) as AudioTrack[];
+    const toStop: AudioTrackType[] = ['music', 'ambient', 'effect', 'system']
+      .filter(a => !tracks.find(e => e === a)) as AudioTrackType[];
     this._audio.stop(...toStop);
   }
 
