@@ -14,6 +14,7 @@ export interface AudioInstance {
   id?: number;
   howl?: Howl;
   track: AudioTrack;
+  playing: boolean;
 }
 
 export type AutioTrackMap = {

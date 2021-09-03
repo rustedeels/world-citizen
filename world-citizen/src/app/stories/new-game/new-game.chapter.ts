@@ -8,6 +8,7 @@ export const NEW_GAME_GENERATOR: ChaptersGenerator = {
   chapters: [
     '/assets/stories/new-game/intro.chapter.md',
     '/assets/stories/new-game/dream.chapter.md',
+    '/assets/stories/new-game/lisbon.chapter.md',
   ],
   charMap: CHARACTERS,
   resMap: RESOURCES

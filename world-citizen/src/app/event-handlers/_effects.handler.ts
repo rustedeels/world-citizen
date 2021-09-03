@@ -11,10 +11,10 @@ export class EffectsHandlers {
   ) {}
 
   @EventHandler('fadeToBlack')
-  public async onNewGame(p?: { id?: string, time?: number }) {
+  public async onFadeToBlack(p?: { id?: string, time?: number }) {
     document.querySelector('body')?.classList?.add('effect', 'fade-to-black');
 
-    const timeout = !p?.time || p.time < 3000 ? 3000 : p.time;
+    const timeout = !p?.time || p.time < 5000 ? 5000 : p.time;
 
     setTimeout(() => {
       if (p?.id) { this._navService.goToChapter(p.id); }
@@ -22,5 +22,22 @@ export class EffectsHandlers {
         document.querySelector('body')?.classList?.remove('effect', 'fade-to-black');
       }, 500);
     }, timeout);
+  }
+
+  @EventHandler('fadeFromBlack')
+  public async onFadeFromBlack() {
+    document.querySelector('body')?.classList?.add('effect', 'fade-from-black');
+    setTimeout(() => {
+      document.querySelector('body')?.classList?.remove('effect', 'fade-from-black');
+    }, 10000);
+  }
+
+  @EventHandler('lisbonCrashEffect')
+  public async onCrashEffect (p?: { id?: string }) {
+    document.querySelector('body')?.classList?.add('effect', 'crash');
+    setTimeout(() => {
+      document.querySelector('body')?.classList?.remove('effect', 'crash');
+      if (p?.id) { this._navService.goToChapter(p.id); }
+    }, 16000);
   }
 }

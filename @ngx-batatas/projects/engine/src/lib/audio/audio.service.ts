@@ -58,6 +58,7 @@ export class AudioService implements ServiceInit {
     i.howl = this.initHowl(track, path);
     i.path = path;
     i.id = path ? i.howl?.play() : undefined;
+    this._tracks[track] = i;
     if (i.id) {
       this._logger.engine(`Playing ${track} track`, path, i.id);
     }
@@ -71,6 +72,8 @@ export class AudioService implements ServiceInit {
       const i = this._tracks[track];
       if (this.isPlaying(track)){
         i.howl?.stop(i.id);
+        i.playing = false;
+        this._tracks[track] = i;
         this._logger.engine('Stop audio', i.path);
       }
     }
@@ -83,9 +86,7 @@ export class AudioService implements ServiceInit {
   }
 
   private isPlaying(track: AudioTrack): boolean {
-    const i = this._tracks[track];
-    if (typeof i.id === 'undefined') return false;
-    return i.howl?.playing(i.id) ?? false;
+    return this._tracks[track].playing;
   }
 
   private calculateVolume(s?: AppSettings): void {
@@ -110,6 +111,7 @@ export class AudioService implements ServiceInit {
     return {
       howl: this.initHowl(track),
       track,
+      playing: false,
     }
   }
 
@@ -120,6 +122,8 @@ export class AudioService implements ServiceInit {
       loop: track === 'ambient' || track === 'music',
       volume: track === 'music' ? this._musicVolume : this._audioVolume,
       src: path,
+      onend: () => this._tracks[track].playing = false,
+      onplay: () => this._tracks[track].playing = true,
     });
   }
 

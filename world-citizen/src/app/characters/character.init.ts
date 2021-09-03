@@ -14,7 +14,7 @@ export const CHARACTERS: CharInit[] = [
     gender: 50,
     name: 'Alex',
     surname: 'Smith',
-    body: ['tits', 'dick', 'longHair'],
+    body: ['tits', 'pussy', 'longHair'],
     resourceId: CoreResources.imageUnknownPlayer,
   },
   {
@@ -25,5 +25,23 @@ export const CHARACTERS: CharInit[] = [
     surname: '',
     body: ['dick', 'flatChest', 'shortHair'],
     resourceId: NewGameResources.portraitPilot
+  },
+  {
+    id: CharacterNames.angelaWhite,
+    birth: new Date(1975, 3, 13),
+    gender: 50,
+    name: 'Angela',
+    surname: 'White',
+    body: ['pussy', 'bigTits', 'longHair'],
+    resourceId: NewGameResources.portraitAngelaWhiteNaked
+  },
+  {
+    id: CharacterNames.danteCole,
+    birth: new Date(1980, 8, 22),
+    gender: -50,
+    name: 'Dante',
+    surname: 'Cole',
+    body: ['dick', 'flatChest', 'shortHair'],
+    resourceId: NewGameResources.portraitDanteCole
   }
 ];

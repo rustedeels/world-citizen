@@ -1,3 +1,4 @@
+import { ResourceNames as CoreNames } from '../../resources/resources.names';
 import { ResourceNames } from './resources.names';
 
 export const RESOURCES = {
@@ -8,4 +9,27 @@ export const RESOURCES = {
   backLivingRoom: ResourceNames.backLivingRoom,
   soundSex: ResourceNames.soundSexWoman1,
   videoAngelaDogUnknown: ResourceNames.videoAngelaWhiteDog1,
+  masturbateDick: ResourceNames.videoMasturbateDickPants,
+  masturbatePussy: ResourceNames.videoMasturbatePussyPants,
+  backBedroom: ResourceNames.backBedroom,
+  soundScratch: CoreNames.soundScratch,
+  videoAngelaDoggyFront: ResourceNames.videoDogStyleFront,
+  videoLickAngelaFem: ResourceNames.videoWomanLickAngelaWhite,
+  videoLickAngelaMan: ResourceNames.videoManLickAngelaWhite,
+  videoLickTitsMale: ResourceNames.videoManLickTits,
+  videoLickTitsFem: ResourceNames.videoWomanLickTits,
+  videoLickAngelaFemOrgasm: ResourceNames.videoWomanLickAngelaWhiteOrgasm,
+  videoLickAngelaManOrgasm: ResourceNames.videoManLickAngelaWhiteOrgasm,
+  videoCumTits: ResourceNames.videoCumTitsAngelaWhite,
+  backChristLX: ResourceNames.backCristLx,
+  videoMaleWankDick1: ResourceNames.videoMaleWankMale1,
+  videoMaleWankPussy1: ResourceNames.videoMaleFingerPussy1,
+  videoMaleWankDick2: ResourceNames.videoMaleWankMale2,
+  videoMaleWankPussy2: ResourceNames.videoMaleFingerPussy2,
+  videoCumWankDick: ResourceNames.videoMaleWankMaleOrgasm,
+  videoCumWankPussy: ResourceNames.videoMaleFingerPussyOrgasm,
+  backCristLxClose: ResourceNames.backCristLxClose,
+  soundPlaneCrash: CoreNames.soundPlaneCrash,
+  backCaisSodreTejo: ResourceNames.backLxCaisTejo,
+  soundPolice: CoreNames.soundPolice,
 }

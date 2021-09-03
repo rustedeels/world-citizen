@@ -45,5 +45,6 @@ export enum ResourceNames {
   videoRimjobAngelaWhite = '71ecd1b4-3989-4357-8ca0-137534f930ee',
   videoWomanLickAngelaWhite = 'bc0daa58-898c-4119-8aa5-7835d29fcb1d',
   videoWomanLickAngelaWhiteOrgasm = '639acfaa-bd9e-4f8b-ba5a-783d6ef03c34',
-  videoWomanLickTits = 'df540353-02e5-40e9-8fbf-87015a01cd7a'
+  videoWomanLickTits = 'df540353-02e5-40e9-8fbf-87015a01cd7a',
+  backLxCaisTejo = '6e364684-81ef-4655-a623-05d479cc85ac'
 }

@@ -45,6 +45,12 @@ export const STORY_RESOURCES: Resource[] = [
     path: '/assets/resources/new-game/back.living_room.png',
   },
   {
+    id: ResourceNames.backLxCaisTejo,
+    type: 'background',
+    tags: ['lxcaistejo'],
+    path: '/assets/resources/new-game/back.lxCaisTejo.jpg',
+  },
+  {
     id: ResourceNames.portraitAngelaWhiteNaked,
     type: 'image',
     tags: ['angela-white'],
