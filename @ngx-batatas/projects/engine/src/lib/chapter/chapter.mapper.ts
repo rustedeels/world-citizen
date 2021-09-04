@@ -1,4 +1,10 @@
 import { LoggerService } from '../logger';
+import {
+  RawChapter,
+  RawDialog,
+  RawProperty,
+  RawTextDialog,
+} from '../parser/parser.model';
 import { StringMap } from '../shared/utils.model';
 import {
   isPrefix,
@@ -13,10 +19,6 @@ import {
   Media,
   NextChapter,
   PartyMember,
-  RawChapter,
-  RawDialog,
-  RawProperty,
-  RawTextDialog,
 } from './chapter.model';
 
 export function mapRawChapters(

@@ -1,14 +1,13 @@
-import { prefix as P } from '../../tools/prefix.tool';
 import {
   RawChapter,
   RawDialog,
   RawProperty,
   RawTextDialog,
-} from '../chapter.model';
-import { MultiToken } from './models';
+} from './parser.model';
 import {
   BOOL,
   CHAPTER,
+  CSS,
   DIALOG,
   DIALOG_TEXT,
   EVENT,
@@ -16,13 +15,15 @@ import {
   NEXT,
   SECTION_REGEX,
   TIMEOUT,
-} from './tokens';
+} from './parser.tokens';
 import {
   extractProp,
   extractToken,
   matchSingle,
+  multiProp,
+  P,
   regexSplit,
-} from './tools';
+} from './parser.tools';
 
 /**
  * Parse chapter files and return its object
@@ -30,7 +31,7 @@ import {
  * @returns
  */
 export function parseChapters(sources: string[]): RawChapter[] {
-  return sources.flatMap(e => parseRawChapters(e));
+  return sources.flatMap(parseRawChapters);
 }
 
 function parseRawChapters(src: string): RawChapter[] {
@@ -83,6 +84,7 @@ function parseDialog(src: string, prefix: string): RawDialog {
     bool: extractToken(dialog, BOOL),
     media: multiProp(dialog, MEDIA),
     text: texts.map(parseDialogText),
+    css: multiProp(dialog, CSS),
   }
 }
 
@@ -99,7 +101,8 @@ function parseDialogText(src: string): RawTextDialog {
   return {
     text: extractToken(src, DIALOG_TEXT),
     bool: extractToken(src, BOOL),
-    media: multiProp(src, MEDIA)
+    media: multiProp(src, MEDIA),
+    css: multiProp(src, CSS),
   }
 }
 
@@ -107,6 +110,3 @@ function getTimeout(part: string): number {
   const timeout = Number(extractToken(part, TIMEOUT));
   return (!isNaN(timeout) && isFinite(timeout)) ? timeout : 0;
 }
-
-const multiProp = (src: string, token: MultiToken)=>
-  extractToken(src, token).map(e => extractProp(e));

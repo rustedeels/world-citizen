@@ -1,10 +1,11 @@
-import { RawProperty } from '../chapter.model';
 import {
   MultiToken,
+  RawProperty,
+  RawSize,
   SingleToken,
   Token,
-} from './models';
-import { PROPERTY_REGEX } from './tokens';
+} from './parser.model.ts';
+import { PROPERTY_REGEX } from './parser.tokens.ts';
 
 /** Extract property in format text[prop](bool) */
 export function extractProp(src: string): RawProperty {
@@ -75,3 +76,20 @@ export function regexSplit(str: string, regex: RegExp): string[] {
 
   return res;
 }
+
+export function parseRawSize(src: string, reg: RegExp): RawSize {
+  const m = matchSingle(src, reg);
+  if (!m) throw new Error('Error parsing size')
+  const size = (m[1] ?? '0,0').split(',').map(e => N(parseFloat(e.trim())));
+  return {
+    width: size[0],
+    height: size[1]
+  };
+}
+
+export const P = (val: string, prefix: string) => `${prefix}=>${val}`;
+
+export const N = (n: number) => isFinite(n) && !isNaN(n) ? n : 0;
+
+export const multiProp = (src: string, token: MultiToken)=>
+  extractToken(src, token).map(e => extractProp(e));

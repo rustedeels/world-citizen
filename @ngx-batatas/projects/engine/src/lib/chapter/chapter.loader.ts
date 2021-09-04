@@ -7,6 +7,7 @@ import { readTextFile } from '@tauri-apps/api/fs';
 import { BaseEntityGenerator } from '../data-loader/base-entity-loader';
 import { LoaderService } from '../data-loader/loader.service';
 import { LoggerService } from '../logger/logger.service';
+import { parseChapters } from '../parser/parser.chapter';
 import { OSPathMapService } from '../system/path-map.service';
 import { mapRawChapters } from './chapter.mapper';
 import {
@@ -15,7 +16,6 @@ import {
   ChapterStoreName,
 } from './chapter.model';
 import { ChapterStore } from './chapter.store';
-import { parseChapters } from './parser/_index';
 
 export const CHAPTERS_TO_LOAD = new InjectionToken<ChaptersGenerator[][]>('CHAPTERS_TO_LOAD');
 

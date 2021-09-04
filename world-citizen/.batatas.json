@@ -1,0 +1,9 @@
+{
+  "resourcesFolder": "./src/assets/resources",
+  "sourcesFolder": "./src/assets/stories",
+  "outputFolder": "./src/app/packages",
+  "mapFile": ".map.ts",
+  "nameFile": ".name.ts",
+  "resFile": ".res.ts",
+  "packageFile": ".pack.ts"
+}

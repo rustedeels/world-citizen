@@ -5,37 +5,6 @@ import {
 
 import { StringMap } from '../shared/utils.model';
 
-export interface RawChapter {
-  name: string;
-  bool: string;
-  timeout: number;
-  party: RawProperty[];
-  dialog: RawDialog[];
-  media: RawProperty[];
-  actions: RawProperty[];
-  next: RawProperty[];
-}
-
-export interface RawDialog {
-  name: string;
-  character: number;
-  media: RawProperty[];
-  bool: string;
-  text: RawTextDialog[];
-}
-
-export interface RawTextDialog {
-  text: string;
-  media: RawProperty[];
-  bool: string;
-}
-
-export interface RawProperty {
-  name: string;
-  props: string;
-  bool: string;
-}
-
 export type Media = MediaStatic | MediaDynamic;
 
 export interface MediaStatic {
