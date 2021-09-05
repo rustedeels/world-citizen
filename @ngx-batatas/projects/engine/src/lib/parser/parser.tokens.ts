@@ -64,7 +64,7 @@ export const PLACE: SingleToken = {
 }
 
 export const MARKER: MultiToken = {
-  regex: /^#\s(.*)/gm,
+  regex: /^#\s([\*\$\>])(?:<(.*?)>|)(.*?),(.*?)\$(.*)\$(.*?)(?:\&(.*?)|)(?:\!(.*)|)$/gm,
   multi: true,
 }
 
@@ -95,3 +95,4 @@ export const NEXT_PLACE: MultiToken = {
 
 export const PROPERTY_REGEX = /^(.*?)\[(.*)\]\((.*)\)|^(.*?)\[(.*)\]|^(.*?)\((?!.*\)`)(.*)\)|^(.*)/gm;
 export const SECTION_REGEX = /(.*)\|(.*)|(.*)/gm;
+

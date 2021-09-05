@@ -57,7 +57,7 @@ function parseRawChapter(src: string, prefix: string): RawChapter {
     actions: multiProp(chapter, EVENT),
     media: multiProp(chapter, MEDIA),
     next: multiProp(chapter, NEXT),
-    dialog: dialogs.map(e => parseDialog(e))
+    dialog: dialogs.map(e => parseDialog(e, prefix))
   }
 }
 
@@ -74,7 +74,7 @@ function parseChapterNameParty(raw: string, prefix: string): [string, RawPropert
   return [P(name, prefix), char];
 }
 
-function parseDialog(src: string): RawDialog {
+function parseDialog(src: string, _: string): RawDialog {
   const [dialog, ...texts] = regexSplit(src, DIALOG_TEXT.regex);
   if (!dialog) throw new Error('Dialog not defined for: ' + src);
   const [name, character] = parseDialogChar(extractToken(dialog, DIALOG));

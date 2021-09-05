@@ -44,39 +44,23 @@ export interface RawProperty {
   bool: string;
 }
 
-export interface RawSize {
-  width: number;
-  height: number;
-}
-
 export interface RawPlace {
   name: string;
-  media: RawProperty[];
-  events: RawProperty[];
-  size: RawSize;
   bool: string;
-}
-
-export type RawMarkerMediaType = 'iddle' | 'click' | 'hover';
-
-export interface RawMarkerMedia {
+  event: string;
   media: RawProperty[];
   css: RawProperty[];
-  size: RawSize;
-  pos: RawSize;
-  bool: string;
-  type: RawMarkerMediaType;
 }
 
+export type RawMarkerType = 'place' | 'chapter' | 'event';
 export interface RawMarker {
   name: string;
-  targets: RawProperty[];
-  css: RawProperty[];
-  media: RawMarkerMedia[];
+  target: string;
+  action: string;
   bool: string;
-  events: RawProperty[];
-  chapter: RawProperty[];
-  place: RawProperty[];
+  pos: [number, number];
+  media: RawProperty[];
+  type: RawMarkerType;
 }
 
 export interface BaseToken {
@@ -102,3 +86,13 @@ export interface Package {
 export interface StringMap<T> {
   [key: string]: T | undefined
 }
+
+export interface MatchGroup<T> {
+  index: number[];
+  default?: string;
+  parse: (match: string, prefix: string) => T | ((match: string) => T);
+}
+
+export type Parser<T extends {}> = {
+  [key in Extract<keyof T, string>]: MatchGroup<T[key]> | number;
+} & { $match: RegExp, $onEnd?: (e: T, prefix: string) => T };

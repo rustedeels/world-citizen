@@ -1,7 +1,7 @@
 import {
+  MatchGroup,
   MultiToken,
   RawProperty,
-  RawSize,
   SingleToken,
   Token,
 } from './parser.model.ts';
@@ -24,6 +24,13 @@ export function matchSingle(src: string, regex: RegExp): RegExpMatchArray | unde
   const all = src.matchAll(regex);
   for (const m of all) return m;
   return undefined;
+}
+
+export function matchMulti(src: string, regex: RegExp): RegExpMatchArray[] {
+  const all = src.matchAll(regex);
+  const res: RegExpMatchArray[] = [];
+  for (const m of all) res.push(m);
+  return res;
 }
 
 /**
@@ -77,19 +84,28 @@ export function regexSplit(str: string, regex: RegExp): string[] {
   return res;
 }
 
-export function parseRawSize(src: string, reg: RegExp): RawSize {
-  const m = matchSingle(src, reg);
-  if (!m) throw new Error('Error parsing size')
-  const size = (m[1] ?? '0,0').split(',').map(e => N(parseFloat(e.trim())));
-  return {
-    width: size[0],
-    height: size[1]
-  };
+export function getGroupValue(m: RegExpMatchArray, g: MatchGroup<unknown>) {
+  for (const i of g.index)
+    if (m[i]) return m[i];
+
+  return g.default ?? '';
 }
 
-export const P = (val: string, prefix: string) => `${prefix}=>${val}`;
+export function getPrefix(src: string): string {
+  const firstLine = src.split('\n')[0];
+  return firstLine.charAt(0) === '#' ? '': firstLine.trim();
+}
+
+export function isPrefix(src: string): boolean {
+  return src.split('=>').length > 1;
+}
+
+export const P = (val: string, prefix: string) => isPrefix(val) ? val : `${prefix}=>${val}`;
 
 export const N = (n: number) => isFinite(n) && !isNaN(n) ? n : 0;
+
+// deno-lint-ignore no-explicit-any
+export const toN = (val: any) => N(parseFloat(val));
 
 export const multiProp = (src: string, token: MultiToken)=>
   extractToken(src, token).map(e => extractProp(e));

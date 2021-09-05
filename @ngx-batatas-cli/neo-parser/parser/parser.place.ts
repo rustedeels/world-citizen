@@ -1,48 +1,42 @@
-import { RawPlace } from './parser.model.ts';
 import {
-  BOOL,
-  EVENT,
-  MEDIA,
-  PLACE,
-  SECTION_REGEX,
-  SIZE,
-} from './parser.tokens.ts';
+  Parser,
+  RawPlace,
+} from './parser.model.ts';
 import {
-  extractToken,
-  matchSingle,
-  multiProp,
+  extractProp,
   P,
-  parseRawSize,
-  regexSplit,
 } from './parser.tools.ts';
 
-export function parcePlaces(sources: string[]): RawPlace[] {
-  return sources.flatMap(parceRawPlaces);
-}
+export const parserPlace: Parser<RawPlace> = {
+  $match: /^#\s(.*?)(?:\&(.*?)|)(?:\$(.*?)|)(?:\!(.*?)|)(?:<(.*)>|)$/gm,
+  name: 1,
+  event: 3,
+  bool: 4,
+  media: {
+    index: [2],
+    parse: (e: string) => {
+      if (!e) return [];
+      const media = e.split(':').map(extractProp);
 
-function parceRawPlaces(src: string): RawPlace[] {
-  const parts = regexSplit(src, PLACE.regex);
-  if (!parts.length) return [];
-  if (parts.length === 1) return parts.map(e => parceRawPlace(e, ''))
+      for (const m of media) {
+        if (!m.props) {
+          m.props = media[0].props || '1920x1080';
+        }
+      }
 
-  const prefix = parts[0]?.trim() ?? '';
-  return parts.slice(1).map(e => parceRawPlace(e, prefix));
-}
-
-function parceRawPlace(src: string, prefix: string): RawPlace {
-  return {
-    name: parsePlaceName(src, prefix),
-    bool: extractToken(src, BOOL),
-    size: parseRawSize(src, SIZE.regex),
-    events: multiProp(src, EVENT),
-    media: multiProp(src, MEDIA),
+      return media;
+    }
+  },
+  css: {
+    index: [5],
+    parse: (e: string) => {
+      if (!e) return [];
+      return e.split(';').map(extractProp);
+    }
+  },
+  $onEnd: (e: RawPlace, prefix: string) => {
+    e.name = P(e.name, prefix);
+    return e;
   }
-}
-
-function parsePlaceName(src: string, prefix: string): string {
-  const m = matchSingle(src, SECTION_REGEX);
-  if (!m) throw new Error('Error parsing place title')
-  const name = m[1] ?? m[3] ?? '';
-  return P(name, prefix);
 }
 

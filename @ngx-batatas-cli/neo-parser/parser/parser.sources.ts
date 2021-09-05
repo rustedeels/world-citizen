@@ -1,16 +1,17 @@
 import { parseChapters } from './parser.chapter.ts';
-import { parseMarkers } from './parser.marker.ts';
+import { parserMarker } from './parser.marker.ts';
 import {
   RawFile,
   RawFileType,
   RawParserResult,
 } from './parser.model.ts';
-import { parcePlaces } from './parser.place.ts';
+import { parserPlace } from './parser.place.ts';
+import { parseAll } from './parser.ts';
 
 export async function parseSources(files: RawFile[]): Promise<RawParserResult> {
   const chapters = parseChapters(await getSourceFile(files, 'chapter'))
-  const places = parcePlaces(await getSourceFile(files, 'place'))
-  const markers = parseMarkers(await getSourceFile(files, 'marker'))
+  const places = parseAll(await getSourceFile(files, 'place'), parserPlace)
+  const markers = parseAll(await getSourceFile(files, 'marker'), parserMarker)
 
   return { chapters, places, markers };
 }
